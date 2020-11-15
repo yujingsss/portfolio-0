@@ -125,27 +125,30 @@ function showProject(){
         });
 
         //show other project images
-        let otherProjectImg = document.getElementsByClassName("project-img")[2];
-        let detailOtherImages = record.fields.other_images;
-        detailOtherImages.forEach(eachRecordId =>{
-            base('detail').find(eachRecordId, function(err, record){
-                console.log(record, record.fields.index);
+        base(record.fields.short_name).select({
+            sort: [{field: "index", direction: "asc"}]
+          }).firstPage(onDetail);
+
+        function onDetail(err, records){
+            console.log(records);
+            records.forEach(record => {
+                let otherProjectImg = document.getElementsByClassName("project-img")[2];
                 let detailOtherWrapper = document.createElement("div");
-                detailOtherWrapper.classList.add("detail-wrapper");
                 let detailOtherTextHidden = document.createElement("div");
-                detailOtherTextHidden.classList.add("detail-text-hidden");
                 let detailOtherImgWrapper = document.createElement("div");
-                detailOtherImgWrapper.classList.add("detail-img-wrapper");
                 detailOtherTextHidden.innerHTML = record.fields.detail_text;
                 let detailOtherImg = document.createElement("img");
                 detailOtherImg.src = record.fields.detail_images[0].url;
                 detailOtherImg.alt = `${record.fields.detail_images[0].filename},${record.fields.detail_images[0].id}`;
+                detailOtherWrapper.classList.add("detail-wrapper");
+                detailOtherTextHidden.classList.add("detail-text-hidden");
+                detailOtherImgWrapper.classList.add("detail-img-wrapper");
                 detailOtherImg.classList.add("zoom-in");
                 detailOtherImgWrapper.appendChild(detailOtherImg);
                 detailOtherWrapper.appendChild(detailOtherTextHidden);
                 detailOtherWrapper.appendChild(detailOtherImgWrapper);
                 otherProjectImg.appendChild(detailOtherWrapper);
             });
-        });
+        }
     });
 }
