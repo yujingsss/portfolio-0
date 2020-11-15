@@ -1,6 +1,7 @@
 var Airtable = require('airtable');
 var base = new Airtable({apiKey: 'key9lokycPO090Rlh'}).base('app9l86cCsmAxsTwf');
 
+
 function listProjects(){
     base('navigation').select({
         sort: [{field: "index", direction: "asc"}]
@@ -64,7 +65,8 @@ function showProject(){
         }
     }
     base('navigation').find(id, function(err, record) {
-        console.log(`Retrieved ${record.fields.short_name}`, record.id, record);
+        if (err) { console.error(err); return; }
+        // console.log(`Retrieved ${record.fields.short_name}`, record.id, record);
 
         //show header cover image 0
         let coverImg0 = document.getElementsByClassName("cover-img")[0];
@@ -97,7 +99,7 @@ function showProject(){
             videoWrapper.innerHTML = record.fields.video;
             coverImg1.appendChild(videoWrapper);
         } else {
-            console.log("no video");
+            // console.log("no video");
             img1.classList.add("zoom-in");
         }
 
@@ -106,31 +108,31 @@ function showProject(){
         infoTag.innerHTML = record.fields.info_tag;
 
         //show project image 0
+        let detailWrapper0 = document.getElementsByClassName("detail-wrapper")[0];
+        let projectImg0 = document.createElement("img");
+        projectImg0.src = record.fields.image_0[0].url;
+        projectImg0.alt = `${record.fields.image_0[0].filename},${record.fields.image_0[0].id}`;
+        projectImg0.classList.add("zoom-in");
+        detailWrapper0.appendChild(projectImg0);
         let descriptionText0 = document.getElementsByClassName("description-text")[0];
         descriptionText0.innerHTML = record.fields.description_0;
-        base('detail').find(record.fields.images[0], function(err, record){
-            let detailTextHidden0 = document.getElementsByClassName("detail-text-hidden")[0];
-            let detailImgWrapper0 = document.getElementsByClassName("detail-img-wrapper")[0];
-            detailTextHidden0.innerHTML = record.fields.detail_text;
-            detailImgWrapper0.innerHTML = `<img class="zoom-in" src="${record.fields.detail_images[0].url}" alt="${record.fields.detail_images[0].filename},${record.fields.detail_images[0].id}" />`
-        });
         //show project image 1
+        let detailWrapper1 = document.getElementsByClassName("detail-wrapper")[1];
+        let projectImg1 = document.createElement("img");
+        projectImg1.src = record.fields.image_1[0].url;
+        projectImg1.alt = `${record.fields.image_1[0].filename},${record.fields.image_1[0].id}`;
+        projectImg1.classList.add("zoom-in");
+        detailWrapper1.appendChild(projectImg1);
         let descriptionText1 = document.getElementsByClassName("description-text")[1];
         descriptionText1.innerHTML = record.fields.description_1;
-        base('detail').find(record.fields.images[1], function(err, record){
-            let detailTextHidden1 = document.getElementsByClassName("detail-text-hidden")[1];
-            let detailImgWrapper1 = document.getElementsByClassName("detail-img-wrapper")[1];
-            detailTextHidden1.innerHTML = record.fields.detail_text;
-            detailImgWrapper1.innerHTML = `<img class="zoom-in" src="${record.fields.detail_images[0].url}" alt="${record.fields.detail_images[0].filename},${record.fields.detail_images[0].id}" />`
-        });
 
         //show other project images
         base(record.fields.short_name).select({
             sort: [{field: "index", direction: "asc"}]
           }).firstPage(onDetail);
-
         function onDetail(err, records){
-            console.log(records);
+            if (err) { console.error(err); return; }
+            // console.log(records);
             records.forEach(record => {
                 let otherProjectImg = document.getElementsByClassName("project-img")[2];
                 let detailOtherWrapper = document.createElement("div");
