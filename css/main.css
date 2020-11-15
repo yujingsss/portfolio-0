@@ -1,0 +1,61 @@
+html {
+    box-sizing: border-box;
+    background-color: black;
+}
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+}
+  
+body {
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    margin: 2em;
+    color: white;
+    user-select: none;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+a:hover {
+    cursor: crosshair;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    user-select: none;
+}
+nav a {
+    font-weight: 300;
+    font-size: 1rem;
+    padding: 0 0.5em 0.5em 0.5em;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+.sub-nav {
+    display: none;
+}
+.nav-works:hover .sub-nav {
+    display: inline;
+}
+button {
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background-color: transparent;
+    border: none;
+}
+.scroll-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.scroll-wrapper a {
+    margin: 2rem;
+    font-size: 10rem;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px white;
+    /* -webkit-background-clip: text; */
+}
