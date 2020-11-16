@@ -107,50 +107,47 @@ function showProject(){
         let infoTag = document.getElementsByClassName("info-tag")[0];
         infoTag.innerHTML = record.fields.info_tag;
 
-        //show project image 0
-        let detailWrapper0 = document.getElementsByClassName("detail-wrapper")[0];
-        let projectImg0 = document.createElement("img");
-        projectImg0.src = record.fields.image_0[0].url;
-        projectImg0.alt = `${record.fields.image_0[0].filename},${record.fields.image_0[0].id}`;
-        projectImg0.classList.add("zoom-in");
-        detailWrapper0.appendChild(projectImg0);
-        let descriptionText0 = document.getElementsByClassName("description-text")[0];
-        descriptionText0.innerHTML = record.fields.description_0;
-        //show project image 1
-        let detailWrapper1 = document.getElementsByClassName("detail-wrapper")[1];
-        let projectImg1 = document.createElement("img");
-        projectImg1.src = record.fields.image_1[0].url;
-        projectImg1.alt = `${record.fields.image_1[0].filename},${record.fields.image_1[0].id}`;
-        projectImg1.classList.add("zoom-in");
-        detailWrapper1.appendChild(projectImg1);
-        let descriptionText1 = document.getElementsByClassName("description-text")[1];
-        descriptionText1.innerHTML = record.fields.description_1;
-
-        //show other project images
+        //show detail images
+        let projectImg = document.getElementsByClassName("project-img")[0];
         base(record.fields.short_name).select({
             sort: [{field: "index", direction: "asc"}]
-          }).firstPage(onDetail);
-        function onDetail(err, records){
+        }).firstPage(showDetail);
+        function showDetail(err, records){
             if (err) { console.error(err); return; }
-            // console.log(records);
-            records.forEach(record => {
-                let otherProjectImg = document.getElementsByClassName("project-img")[2];
-                let detailOtherWrapper = document.createElement("div");
-                let detailOtherTextHidden = document.createElement("div");
-                let detailOtherImgWrapper = document.createElement("div");
-                detailOtherTextHidden.innerHTML = record.fields.detail_text;
-                let detailOtherImg = document.createElement("img");
-                detailOtherImg.src = record.fields.detail_images[0].url;
-                detailOtherImg.alt = `${record.fields.detail_images[0].filename},${record.fields.detail_images[0].id}`;
-                detailOtherWrapper.classList.add("detail-wrapper");
-                detailOtherTextHidden.classList.add("detail-text-hidden");
-                detailOtherImgWrapper.classList.add("detail-img-wrapper");
-                detailOtherImg.classList.add("zoom-in");
-                detailOtherImgWrapper.appendChild(detailOtherImg);
-                detailOtherWrapper.appendChild(detailOtherTextHidden);
-                detailOtherWrapper.appendChild(detailOtherImgWrapper);
-                otherProjectImg.appendChild(detailOtherWrapper);
-            });
+            for (let i = 0; i < records.length; i++){
+                if (i < 2){
+                    let descriptionText = document.createElement("div");
+                    descriptionText.classList.add("description-text");
+                    descriptionText.innerHTML = records[i].fields.detail_text;
+                    projectImg.appendChild(descriptionText);
+                    let detailWrapper = document.createElement("div");
+                    detailWrapper.classList.add("detail-wrapper");
+                    let detailImg = document.createElement("img");
+                    detailImg.classList.add("zoom-in");
+                    detailImg.src = records[i].fields.detail_images[0].url;
+                    detailImg.alt = `${records[i].fields.detail_images[0].filename}, ${records[i].fields.detail_images[0].id}`;
+                    detailWrapper.appendChild(detailImg);
+                    projectImg.appendChild(detailWrapper);
+                    console.log(detailImg.outerHTML);
+                } else {
+                    let detailWrapper = document.createElement("div");
+                    let detailTextHidden = document.createElement("div");
+                    let detailImgWrapper = document.createElement("div");
+                    detailTextHidden.innerHTML = records[i].fields.detail_text;
+                    let detailImg = document.createElement("img");
+                    detailImg.src = records[i].fields.detail_images[0].url;
+                    detailImg.alt = `${records[i].fields.detail_images[0].filename}, ${records[i].fields.detail_images[0].id}`;
+                    detailWrapper.classList.add("detail-wrapper");
+                    detailTextHidden.classList.add("detail-text-hidden");
+                    detailImgWrapper.classList.add("detail-img-wrapper");
+                    detailImg.classList.add("zoom-in");
+                    detailImgWrapper.appendChild(detailImg);
+                    detailWrapper.appendChild(detailTextHidden);
+                    detailWrapper.appendChild(detailImgWrapper);
+                    projectImg.appendChild(detailWrapper);
+                    console.log(detailImg.outerHTML);
+                }
+            }
         }
     });
 }
