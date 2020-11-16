@@ -27,16 +27,15 @@ function listProjects(){
             a.href = `project.html?${id}`;
             a.textContent = records[i].fields.short_name;
             scrollWrapper.appendChild(a);
+            //hover div navigation image
             a.addEventListener("mousemove", showHoverDiv);
-            let hoverdiv = document.createElement("img");
-            hoverdiv.classList.add("hover-div");
+            let hoverdiv = document.querySelector(".hover-div");
             hoverdiv.style.zIndex = -1;
             hoverdiv.style.width = "250px";
             hoverdiv.style.height = "250px";
             hoverdiv.style.filter = "blur(5px) contrast(150%)";
             hoverdiv.style.borderRadius = "200px";
             function showHoverDiv (event){
-                // console.log(event);
                 hoverdiv.style.display = "block";
                 hoverdiv.src = records[i].fields.cover_image[0].thumbnails.large.url;
                 hoverdiv.style.position = "absolute";
@@ -46,6 +45,7 @@ function listProjects(){
             }
             a.addEventListener("mouseleave", ()=>{
                 hoverdiv.style.display = "none";
+                hoverdiv.src = "";
                 hoverdiv.innerHTML = "";
             });
         }
@@ -85,12 +85,11 @@ function showProject(){
     }
     base('navigation').find(id, function(err, record) {
         if (err) { console.error(err); return; }
-        // console.log(`Retrieved ${record.fields.short_name}`, record.id, record);
+        //console.log(record)
 
         //show header cover image 0
         let coverImg0 = document.getElementsByClassName("cover-img")[0];
         let img0 = document.createElement("img");
-        // img0.classList.add("zoom-in");
         img0.classList.add("zoom-in-cover");
         img0.src = record.fields.cover_image[0].url;
         img0.alt = `${record.fields.cover_image[0].filename},${record.fields.cover_image[0].id}`;
@@ -113,15 +112,13 @@ function showProject(){
         img1.alt = `${record.fields.cover_image[1].filename},${record.fields.cover_image[1].id}`;
         coverImg1.appendChild(img1);
         if (record.fields.video != null){
-            // img1.classList.add("zoom-in", "cover");
             img1.classList.add("zoom-in-cover", "cover");
             let videoWrapper = document.createElement("div");
             videoWrapper.classList.add("video-wrapper");
             videoWrapper.innerHTML = record.fields.video;
             coverImg1.appendChild(videoWrapper);
         } else {
-            // console.log("no video");
-            // img1.classList.add("zoom-in");
+            console.log("no video");
             img1.classList.add("zoom-in-cover");
         }
 
@@ -181,7 +178,7 @@ function showProject(){
 }
 
 function lightbox(img, index, tableName){
-    console.log(index, tableName);
+    // console.log(index, tableName);
     let expand = document.getElementById("expand");
     expand.style.display = "flex";
     let imgdiv = document.createElement("div");
@@ -199,6 +196,28 @@ function lightbox(img, index, tableName){
     backdiv.innerHTML = `<img id="back" src="image/back.png">`;
     backdiv.classList.add("back-div");
     expand.appendChild(backdiv);
+    base(tableName).select({
+        sort: [{field: "index", direction: "asc"}]
+    }).firstPage(lightboxImage);
+    function lightboxImage(err, records){
+        if (err) { console.error(err); return; }
+        let lightboxindex = index;
+        rightdiv.addEventListener("click", () => {
+            lightboxindex ++;
+            lightboxindex = lightboxindex % records.length;
+            imgdiv.innerHTML = `<img class="zoom-in" src="${records[lightboxindex].fields.detail_images[0].url}" />`;
+        });
+        leftdiv.addEventListener("click", () => {
+            if (lightboxindex == 0) {
+                lightboxindex = records.length - 1;
+            } else {
+                lightboxindex --;
+            }
+            lightboxindex = lightboxindex % records.length;
+            imgdiv.innerHTML = `<img class="zoom-in" src="${records[lightboxindex].fields.detail_images[0].url}" />`;
+        });
+    }
+
     document.getElementById("back").addEventListener("click",()=>{
         expand.style.display = "none";
         imgdiv.style.display = "none";
