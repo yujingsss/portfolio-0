@@ -10,7 +10,6 @@ function listProjects(){
     function onProjects(err, records){
         if (err) { console.error(err); return; }
         // console.log(records);
-
         let subNav = document.getElementsByClassName("sub-nav")[0];
         subNav.innerHTML = "";
         for (let i = 0; i < records.length; i++) {
@@ -20,7 +19,6 @@ function listProjects(){
             a.textContent = records[i].fields.short_name;
             subNav.appendChild(a);
         }
-
         let scrollWrapper = document.getElementsByClassName("scroll-wrapper")[0];
         scrollWrapper.innerHTML = "";
         for (let i = 0; i < records.length; i++) {
@@ -29,6 +27,27 @@ function listProjects(){
             a.href = `project.html?${id}`;
             a.textContent = records[i].fields.short_name;
             scrollWrapper.appendChild(a);
+            a.addEventListener("mousemove", showHoverDiv);
+            let hoverdiv = document.createElement("img");
+            hoverdiv.classList.add("hover-div");
+            hoverdiv.style.zIndex = -1;
+            hoverdiv.style.width = "250px";
+            hoverdiv.style.height = "250px";
+            hoverdiv.style.filter = "blur(5px) contrast(150%)";
+            hoverdiv.style.borderRadius = "200px";
+            function showHoverDiv (event){
+                // console.log(event);
+                hoverdiv.style.display = "block";
+                hoverdiv.src = records[i].fields.cover_image[0].thumbnails.large.url;
+                hoverdiv.style.position = "absolute";
+                hoverdiv.style.top = `${event.clientY}px`;
+                hoverdiv.style.left = `${event.clientX}px`;
+                document.body.appendChild(hoverdiv);
+            }
+            a.addEventListener("mouseleave", ()=>{
+                hoverdiv.style.display = "none";
+                hoverdiv.innerHTML = "";
+            });
         }
     }
 }

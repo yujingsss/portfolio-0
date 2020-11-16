@@ -174,6 +174,8 @@ img {
 }
 .detail-img-wrapper {
     z-index: 0;
+    opacity: 1;
+    transition: opacity 1s;
 }
 .detail-img-wrapper:hover {
     opacity: 0.2;
