@@ -178,7 +178,7 @@ img {
 .detail-img-wrapper:hover {
     opacity: 0.2;
 }
-.zoom-in {
+.zoom-in, .zoom-in-cover {
     width: 100%;
     height: auto;
 }

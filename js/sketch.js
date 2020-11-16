@@ -71,7 +71,8 @@ function showProject(){
         //show header cover image 0
         let coverImg0 = document.getElementsByClassName("cover-img")[0];
         let img0 = document.createElement("img");
-        img0.classList.add("zoom-in");
+        // img0.classList.add("zoom-in");
+        img0.classList.add("zoom-in-cover");
         img0.src = record.fields.cover_image[0].url;
         img0.alt = `${record.fields.cover_image[0].filename},${record.fields.cover_image[0].id}`;
         coverImg0.appendChild(img0);
@@ -93,14 +94,16 @@ function showProject(){
         img1.alt = `${record.fields.cover_image[1].filename},${record.fields.cover_image[1].id}`;
         coverImg1.appendChild(img1);
         if (record.fields.video != null){
-            img1.classList.add("zoom-in", "cover");
+            // img1.classList.add("zoom-in", "cover");
+            img1.classList.add("zoom-in-cover", "cover");
             let videoWrapper = document.createElement("div");
             videoWrapper.classList.add("video-wrapper");
             videoWrapper.innerHTML = record.fields.video;
             coverImg1.appendChild(videoWrapper);
         } else {
             // console.log("no video");
-            img1.classList.add("zoom-in");
+            // img1.classList.add("zoom-in");
+            img1.classList.add("zoom-in-cover");
         }
 
         //show info tag
@@ -128,7 +131,10 @@ function showProject(){
                     detailImg.alt = `${records[i].fields.detail_images[0].filename}, ${records[i].fields.detail_images[0].id}`;
                     detailWrapper.appendChild(detailImg);
                     projectImg.appendChild(detailWrapper);
-                    console.log(detailImg.outerHTML);
+                    // show lightbox
+                    detailImg.addEventListener("click", (event)=>{
+                        lightbox(detailImg,records[i].fields.index, record.fields.short_name);
+                    });
                 } else {
                     let detailWrapper = document.createElement("div");
                     let detailTextHidden = document.createElement("div");
@@ -145,9 +151,94 @@ function showProject(){
                     detailWrapper.appendChild(detailTextHidden);
                     detailWrapper.appendChild(detailImgWrapper);
                     projectImg.appendChild(detailWrapper);
-                    console.log(detailImg.outerHTML);
+                    //show lightbox
+                    detailImg.addEventListener("click", (event)=>{
+                        lightbox(detailImg, records[i].fields.index, record.fields.short_name);
+                    });
                 }
             }
         }
     });
 }
+
+function lightbox(img, index, tableName){
+    console.log(index, tableName);
+    let expand = document.getElementById("expand");
+    expand.style.display = "flex";
+    let imgdiv = document.createElement("div");
+    let backdiv = document.createElement("div");
+    imgdiv.innerHTML = img.outerHTML;
+    imgdiv.classList.add("expand-img");
+    let controldiv = document.createElement("div");
+    let leftdiv = document.createElement("div");
+    let rightdiv = document.createElement("div");
+    controldiv.appendChild(leftdiv);
+    controldiv.appendChild(rightdiv);
+    controldiv.classList.add("control-div");
+    expand.appendChild(imgdiv);
+    expand.appendChild(controldiv);
+    backdiv.innerHTML = `<img id="back" src="image/back.png">`;
+    backdiv.classList.add("back-div");
+    expand.appendChild(backdiv);
+    document.getElementById("back").addEventListener("click",()=>{
+        expand.style.display = "none";
+        imgdiv.style.display = "none";
+        imgdiv.innerHTML = "";
+        controldiv.style.display = "none";
+        controldiv.innerHTML = "";
+        backdiv.style.display = "none";
+        backdiv.innerHTML = "";
+    });
+}
+// function lightbox(){
+//     let zoomIn = document.getElementsByClassName("zoom-in");
+//     // let zoomIn = document.querySelectorAll(".zoom-in");
+//     let expand = document.getElementById("expand");
+//     console.log(zoomIn.length, zoomIn);
+//     for (let i = 0; i < zoomIn.length; i++){
+//         zoomIn[i].addEventListener("click", () => {
+//             console.log(zoomIn[i].outerHTML);
+//             console.log(zoomIn[i].currentSrc);
+//             expand.style.display = "flex";
+//             let imgdiv = document.createElement("div");
+//             let backdiv = document.createElement("div");
+//             imgdiv.innerHTML = zoomIn[i].outerHTML;
+//             imgdiv.classList.add("expand-img");
+//             let controldiv = document.createElement("div");
+//             let leftdiv = document.createElement("div");
+//             let rightdiv = document.createElement("div");
+//             controldiv.appendChild(leftdiv);
+//             controldiv.appendChild(rightdiv);
+//             controldiv.classList.add("control-div");
+//             expand.appendChild(imgdiv);
+//             expand.appendChild(controldiv);
+//             backdiv.innerHTML = `<img id="back" src="image/back.png">`;
+//             backdiv.classList.add("back-div");
+//             expand.appendChild(backdiv);
+//             let j = i;
+//             rightdiv.addEventListener("click", () => {
+//                 j++;
+//                 j = j % zoomIn.length;
+//                 imgdiv.innerHTML = `${zoomIn[j].outerHTML}`;
+//             });
+//             leftdiv.addEventListener("click", () => {
+//                 if (j == 0) {
+//                     j = zoomIn.length - 1;
+//                 } else {
+//                     j--;
+//                 }
+//                 j = j % zoomIn.length;
+//                 imgdiv.innerHTML = `${zoomIn[j].outerHTML}`
+//             });
+//             document.getElementById("back").addEventListener("click",()=>{
+//                 expand.style.display = "none";
+//                 imgdiv.style.display = "none";
+//                 imgdiv.innerHTML = "";
+//                 controldiv.style.display = "none";
+//                 controldiv.innerHTML = "";
+//                 backdiv.style.display = "none";
+//                 backdiv.innerHTML = "";
+//             });
+//         });
+//     }
+// }
