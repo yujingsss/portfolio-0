@@ -21,6 +21,7 @@ nav {
     flex-direction: row;
     justify-content: flex-start;
     position: relative;
+    margin-bottom: 0.25rem;
 }
 nav div:nth-of-type(3){
     position: absolute;
@@ -115,7 +116,8 @@ img {
     object-fit: cover;
 }
 .info-tag {
-    margin: 1rem 0.5rem 2rem 0.5rem;
+    /* margin: 1rem 0.5rem 2rem 0.5rem; */
+    margin: 0;
     display: flex; 
     flex-direction: row;
     flex-wrap: wrap;
@@ -129,63 +131,65 @@ img {
 .info-tag .info-tag-title {
     font-weight: bold;
 }
-.description-text {
+.project-img {
+    margin-top: 20rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+.project-img > div {
+    width:100%;
+    height: auto;
+    margin-top: 2em;
+}
+.text-img-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.text-img-wrapper .description-text {
     padding: 0.5rem 2rem 0.5rem 0.5rem;
+}
+.img-text-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.img-text-wrapper > .description-text {
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
+}
+.description-text{
+    width: 50%;
+}
+.detail-wrapper {
+    width: 50%;
+}
+.detail-wrapper-small {
+    width: 100%;
+}
+.detail-wrapper-small img{
+    width: 50%;
+    height: auto;
 }
 .description-text h1 {
     font-weight: 300;
     margin: 0.5rem 0rem 0.5rem 0rem;
 }
-.project-img {
-    display: flex;
-    flex-wrap: wrap;
+.description-text h2{
+    margin: 0;
 }
-.project-img div {
-    width: 50%; 
-}
-.detail-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    flex-grow: 1;
-    position: relative;
-}
-.detail-wrapper div {
-    width: 100%;
-}
-.detail-text-hidden {
-    height: 100%;
-    max-height: 100%;
-    max-width: 95%;
-    position: absolute;
-    top: 0;
-    padding: 0.5rem;
-    background-color: rgba(255,255,255,0.6);
-    z-index: -1;
-}
-.detail-text-hidden h1 {
-    font-weight: 300;
-    padding: 0rem 1rem 0em 1rem;
-}
-.detail-text-hidden h2 {
-    padding: 0rem 1rem 0em 1rem;
-}
-.detail-img-wrapper {
-    z-index: 0;
-    opacity: 1;
-    transition: opacity 1s;
-}
-.detail-img-wrapper:hover {
-    opacity: 0.2;
-}
+
 .zoom-in, .zoom-in-cover {
     width: 100%;
     height: auto;
+    transition: transform 0.4s ease-in-out;
+    /* transition: opacity 0.4s ease-in-out; */
 }
 .zoom-in:hover{
     cursor: crosshair;
+    /* opacity: 0.75; */
+    transform: scale(1.015);
 }
 #expand {
     width: 100vw;
@@ -200,9 +204,7 @@ img {
     align-items: center;
 }
 .expand-img{
-    width: 75%;
-    /* display: flex;
-    justify-content: flex-start; */
+    width: 90%;
     z-index: -1;
 }
 .expand-img > .zoom-in {
@@ -241,8 +243,11 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding: 0.5rem;
+    margin: 5rem 0 1rem 0;
 }
+
 footer p, footer a{
     font-size: 1rem;
     font-weight: 300;
@@ -252,12 +257,13 @@ footer p, footer a{
 
 @media screen and (max-width: 1100px) {
     body {
-        margin: 0.5em;
+        margin: 1em;
     }
     .info-wrapper{
         height: auto;
         flex-direction: column;
-        margin: 3rem;
+        /* align-items: center; */
+        margin: 6rem 3rem 6rem 3rem;
     }
     .info-wrapper div:nth-of-type(1) {
         width: 100%;
@@ -266,24 +272,68 @@ footer p, footer a{
         width: 100%;
         margin-top: 0.5rem;
     }
-    .project-img div{
+    .description-text, .detail-wrapper {
         width: 100%;
     }
     .description-text {
-        margin: 3rem;
+        margin: 10rem 5rem 10rem 5rem;
     }
-    .detail-text-hidden {
-        max-width: 80%;
+    .description-text h2{
+        margin-bottom: 0.5rem;
+    }
+    .text-img-wrapper .description-text {
+        padding: 0.5rem 2rem 0.5rem 0.5rem;
+    }
+    .img-text-wrapper .description-text {
+        padding: 0.5rem 2rem 0.5rem 0.5rem;
     }
 }
 @media screen and (max-width: 640px){
+    body {
+        margin: 0.5em;
+    }
+    img {
+        padding: 0.25rem;
+    }
+    .info-tag li, nav a {
+        font-size: 14px;
+    }
+    .info-wrapper{
+        margin: 4em 1rem 4em 1em;
+    }
     .info-wrapper div:nth-of-type(2){
         text-align: start;
     }
-    .detail-text-hidden {
-        max-width: 95%;
+    .project-img {
+        margin-top: 10rem;
     }
-    .detail-text-hidden h1 {
-        font-size: 24px;
+    .project-img > div {
+        margin-top: 0.5rem;
+    }
+    .description-text {
+        margin: 0;
+    }
+    .description-text h2{
+        font-size: 1em;
+        margin: 0;
+        padding: 0 0 0.5rem 0;
+    }
+    .description-text h1 {
+        font-size: 1.25em;
+        margin: 0;
+        padding: 0 0 0.5rem 0;
+    }
+    .description-text {
+        margin-top: 2.5em;
+        margin-bottom: 2.5em;
+    }
+    .text-img-wrapper .description-text {
+        padding: 2rem;
+    }
+    .img-text-wrapper .description-text {
+        padding: 2rem;
+    }
+    footer p, footer a{
+        font-size: 14px;
     }
 }

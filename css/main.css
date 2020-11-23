@@ -31,10 +31,13 @@ nav {
     align-items: flex-start;
     user-select: none;
 }
+nav > div {
+    margin: 0.15rem;
+}
 nav a {
     font-weight: 300;
     font-size: 1rem;
-    padding: 0 0.5em 0.5em 0.5em;
+    padding: 0.5em;
 }
 nav a:hover {
     text-decoration: underline;
@@ -57,6 +60,7 @@ button {
     margin: 0;
 }
 .scroll-wrapper {
+    max-width: 100vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -66,6 +70,48 @@ button {
     font-size: 10rem;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 1px white;
+    -webkit-text-stroke: 1.25px white;
     /* -webkit-background-clip: text; */
+}
+.about-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.about-page > div, .about-page nav {
+    border: 1px red solid;
+}
+.about-page nav {
+    flex: 20%;
+}
+.about-page .about-text {
+    flex: 40%;
+}
+.about-page .about-contact {
+    flex: 40%;
+}
+
+@media screen and (max-width: 800px){
+    body {
+        margin: 1em;
+    }
+    .scroll-wrapper a {
+        font-size: 8rem;
+        margin: 1rem;
+    }
+}
+@media screen and (max-width: 420px){
+    body {
+        margin: 0.5em;
+    }
+    nav {
+        margin-top: 1rem;
+    }
+    /* .scroll-wrapper {
+        justify-content: center;
+    } */
+    .scroll-wrapper a {
+        font-size: 5rem;
+        margin: 1rem;
+    }
 }

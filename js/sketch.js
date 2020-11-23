@@ -83,90 +83,126 @@ function showProject(){
             subNav.appendChild(a);
         }
     }
+
     base('navigation').find(id, function(err, record) {
         if (err) { console.error(err); return; }
         //console.log(record)
 
-        //show header cover image 0
-        let coverImg0 = document.getElementsByClassName("cover-img")[0];
-        let img0 = document.createElement("img");
-        img0.classList.add("zoom-in-cover");
-        img0.src = record.fields.cover_image[0].url;
-        img0.alt = `${record.fields.cover_image[0].filename},${record.fields.cover_image[0].id}`;
-        coverImg0.appendChild(img0);
+        //for case study
+        if (record.fields.category == "case_study"){
+            //show header cover image 0
+            let coverImg0 = document.getElementsByClassName("cover-img")[0];
+            let img0 = document.createElement("img");
+            img0.classList.add("zoom-in-cover");
+            img0.src = record.fields.cover_image[0].url;
+            img0.alt = `${record.fields.cover_image[0].filename},${record.fields.cover_image[0].id}`;
+            coverImg0.appendChild(img0);
 
-        //show information
-        let info = document.getElementsByClassName("info-wrapper")[0];
-        let divLeft = document.createElement("div");
-        let divRight = document.createElement("div");
-        divLeft.innerHTML = `<h1>${record.fields.title}</h1><h2>${record.fields.subtitle}</h2>`;
-        divRight.innerHTML = `<h2>${record.fields.information}</h2>`;
-        info.appendChild(divLeft);
-        info.appendChild(divRight);
+            //show information
+            let info = document.getElementsByClassName("info-wrapper")[0];
+            if (record.fields.information != null){
+                let divLeft = document.createElement("div");
+                let divRight = document.createElement("div");
+                divLeft.innerHTML = `<h1>${record.fields.title}</h1><h2>${record.fields.subtitle}</h2>`;
+                divRight.innerHTML = `<h2>${record.fields.information}</h2>`;
+                info.appendChild(divLeft);
+                info.appendChild(divRight);
+            }
 
-        //show video, video cover/cover image 1
-        let coverImg1 = document.getElementsByClassName("cover-img")[1];
-        coverImg1.innerHTML = "";
-        let img1 = document.createElement("img");
-        img1.src = record.fields.cover_image[1].url;
-        img1.alt = `${record.fields.cover_image[1].filename},${record.fields.cover_image[1].id}`;
-        coverImg1.appendChild(img1);
-        if (record.fields.video != null){
-            img1.classList.add("zoom-in-cover", "cover");
-            let videoWrapper = document.createElement("div");
-            videoWrapper.classList.add("video-wrapper");
-            videoWrapper.innerHTML = record.fields.video;
-            coverImg1.appendChild(videoWrapper);
-        } else {
-            console.log("no video");
-            img1.classList.add("zoom-in-cover");
-        }
+            //show video, video cover/cover image 1
+            let coverImg1 = document.getElementsByClassName("cover-img")[1];
+            coverImg1.innerHTML = "";
+            let img1 = document.createElement("img");
+            img1.src = record.fields.cover_image[1].url;
+            img1.alt = `${record.fields.cover_image[1].filename},${record.fields.cover_image[1].id}`;
+            coverImg1.appendChild(img1);
+            if (record.fields.video != null){
+                img1.classList.add("zoom-in-cover", "cover");
+                let videoWrapper = document.createElement("div");
+                videoWrapper.classList.add("video-wrapper");
+                videoWrapper.innerHTML = record.fields.video;
+                coverImg1.appendChild(videoWrapper);
+            } else {
+                console.log("no video");
+                img1.classList.add("zoom-in-cover");
+            }
 
-        //show info tag
-        let infoTag = document.getElementsByClassName("info-tag")[0];
-        infoTag.innerHTML = record.fields.info_tag;
+            //show info tag
+            let infoTag0 = document.getElementsByClassName("info-tag")[0];
+            let liTitle = document.createElement("li");
+            liTitle.classList.add("info-tag-title");
+            let liCreator = document.createElement("li");
+            let liYear = document.createElement("li");
+            liTitle.innerText = record.fields.title;
+            liCreator.innerText = record.fields.creator;
+            liYear.innerText = record.fields.year;
+            infoTag0.appendChild(liTitle);
+            infoTag0.appendChild(liCreator);
+            infoTag0.appendChild(liYear);
+            let infoTag = document.getElementsByClassName("info-tag")[1];
+            if (record.fields.info_tag != null){
+                infoTag.innerHTML = record.fields.info_tag;
+            }
 
-        //show detail images
-        let projectImg = document.getElementsByClassName("project-img")[0];
-        base(record.fields.short_name).select({
-            sort: [{field: "index", direction: "asc"}]
-        }).firstPage(showDetail);
-        function showDetail(err, records){
-            if (err) { console.error(err); return; }
-            for (let i = 0; i < records.length; i++){
-                if (i < 2){
+            //show detail images
+            let projectImg = document.getElementsByClassName("project-img")[0];
+            base(record.fields.short_name).select({
+                sort: [{field: "index", direction: "asc"}]
+            }).firstPage(showDetail);
+            function showDetail(err, records){
+                if (err) { console.error(err); return; }
+                for (let i = 0; i < records.length; i++){
+                    let textImgWrapper = document.createElement("div");
+                    if (records[i].fields.category[0] == "left"){
+                        textImgWrapper.classList.add("text-img-wrapper");
+                    } else if (records[i].fields.category[0] == "right") {
+                        textImgWrapper.classList.add("img-text-wrapper");
+                    }
+
                     let descriptionText = document.createElement("div");
                     descriptionText.classList.add("description-text");
-                    descriptionText.innerHTML = records[i].fields.detail_text;
-                    projectImg.appendChild(descriptionText);
+                    if (records[i].fields.detail_text != null){
+                        descriptionText.innerHTML = records[i].fields.detail_text;
+                    } else {
+                        descriptionText.innerHTML = ""; 
+                    }
+
                     let detailWrapper = document.createElement("div");
                     detailWrapper.classList.add("detail-wrapper");
+
                     let detailImg = document.createElement("img");
                     detailImg.classList.add("zoom-in");
                     detailImg.src = records[i].fields.detail_images[0].url;
                     detailImg.alt = `${records[i].fields.detail_images[0].filename}, ${records[i].fields.detail_images[0].id}`;
                     detailWrapper.appendChild(detailImg);
-                    projectImg.appendChild(detailWrapper);
-                    // show lightbox
-                    detailImg.addEventListener("click", (event)=>{
-                        lightbox(detailImg,records[i].fields.index, record.fields.short_name);
-                    });
-                } else {
-                    let detailWrapper = document.createElement("div");
-                    let detailTextHidden = document.createElement("div");
-                    let detailImgWrapper = document.createElement("div");
-                    detailTextHidden.innerHTML = records[i].fields.detail_text;
-                    let detailImg = document.createElement("img");
-                    detailImg.src = records[i].fields.detail_images[0].url;
-                    detailImg.alt = `${records[i].fields.detail_images[0].filename}, ${records[i].fields.detail_images[0].id}`;
-                    detailWrapper.classList.add("detail-wrapper");
-                    detailTextHidden.classList.add("detail-text-hidden");
-                    detailImgWrapper.classList.add("detail-img-wrapper");
-                    detailImg.classList.add("zoom-in");
-                    detailImgWrapper.appendChild(detailImg);
-                    detailWrapper.appendChild(detailTextHidden);
-                    detailWrapper.appendChild(detailImgWrapper);
-                    projectImg.appendChild(detailWrapper);
+
+                    //small detail images
+                    let detailWrapperSmall = document.createElement("div");
+                    detailWrapperSmall.classList.add("detail-wrapper-small");
+                    if (records[i].fields.category[1] == "multiple"){
+                        for (let j = 1; j < records[i].fields.detail_images.length; j ++){
+                            let detailImgSmall = document.createElement("img");
+                            detailImgSmall.classList.add("zoom-in");
+                            detailImgSmall.src = records[i].fields.detail_images[j].url;
+                            detailImgSmall.alt = `${records[i].fields.detail_images[j].filename}, ${records[i].fields.detail_images[j].id}`;
+                            detailWrapperSmall.appendChild(detailImgSmall);
+                            //lightbox
+                            detailImgSmall.addEventListener("click",(event)=>{
+                                lightbox(detailImgSmall, records[i].fields.index, record.fields.short_name);
+                            });
+                        } 
+                        detailWrapper.appendChild(detailWrapperSmall);
+                    }
+                    if (records[i].fields.category[2] == "full"){
+                        // detailWrapperSmall.style.width = "75%";
+                        detailWrapper.style.width = "100%";
+                        descriptionText.style.display = "none";
+                    }
+                    
+                    textImgWrapper.appendChild(descriptionText);
+                    textImgWrapper.appendChild(detailWrapper);
+                    projectImg.appendChild(textImgWrapper);
+
                     //show lightbox
                     detailImg.addEventListener("click", (event)=>{
                         lightbox(detailImg, records[i].fields.index, record.fields.short_name);
@@ -228,55 +264,4 @@ function lightbox(img, index, tableName){
         backdiv.innerHTML = "";
     });
 }
-// function lightbox(){
-//     let zoomIn = document.getElementsByClassName("zoom-in");
-//     // let zoomIn = document.querySelectorAll(".zoom-in");
-//     let expand = document.getElementById("expand");
-//     console.log(zoomIn.length, zoomIn);
-//     for (let i = 0; i < zoomIn.length; i++){
-//         zoomIn[i].addEventListener("click", () => {
-//             console.log(zoomIn[i].outerHTML);
-//             console.log(zoomIn[i].currentSrc);
-//             expand.style.display = "flex";
-//             let imgdiv = document.createElement("div");
-//             let backdiv = document.createElement("div");
-//             imgdiv.innerHTML = zoomIn[i].outerHTML;
-//             imgdiv.classList.add("expand-img");
-//             let controldiv = document.createElement("div");
-//             let leftdiv = document.createElement("div");
-//             let rightdiv = document.createElement("div");
-//             controldiv.appendChild(leftdiv);
-//             controldiv.appendChild(rightdiv);
-//             controldiv.classList.add("control-div");
-//             expand.appendChild(imgdiv);
-//             expand.appendChild(controldiv);
-//             backdiv.innerHTML = `<img id="back" src="image/back.png">`;
-//             backdiv.classList.add("back-div");
-//             expand.appendChild(backdiv);
-//             let j = i;
-//             rightdiv.addEventListener("click", () => {
-//                 j++;
-//                 j = j % zoomIn.length;
-//                 imgdiv.innerHTML = `${zoomIn[j].outerHTML}`;
-//             });
-//             leftdiv.addEventListener("click", () => {
-//                 if (j == 0) {
-//                     j = zoomIn.length - 1;
-//                 } else {
-//                     j--;
-//                 }
-//                 j = j % zoomIn.length;
-//                 imgdiv.innerHTML = `${zoomIn[j].outerHTML}`
-//             });
-//             document.getElementById("back").addEventListener("click",()=>{
-//                 expand.style.display = "none";
-//                 imgdiv.style.display = "none";
-//                 imgdiv.innerHTML = "";
-//                 controldiv.style.display = "none";
-//                 controldiv.innerHTML = "";
-//                 backdiv.style.display = "none";
-//                 backdiv.innerHTML = "";
-//             });
-//         });
-//     }
-// }
+
