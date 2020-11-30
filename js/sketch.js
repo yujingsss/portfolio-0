@@ -265,3 +265,40 @@ function lightbox(img, index, tableName){
     });
 }
 
+function showMainVideo(){
+    base('others').find('recY4frnfxVacQC9M', function(err, record) {
+        if (err) { console.error(err); return; }
+        // console.log('Retrieved', record);
+
+        //show background video
+        let mainVideo = document.getElementsByClassName("main-video")[0];
+        let videoDiv = document.createElement("video");
+        videoDiv.autoplay = "autoplay";
+        videoDiv.muted = "muted";
+        videoDiv.loop = "loop";
+        let videoSource = document.createElement("source");
+        videoSource.src = record.fields.video[0].url;
+        videoSource.type = "video/mp4";
+        videoDiv.appendChild(videoSource);
+        mainVideo.appendChild(videoDiv);
+    });
+}
+function showAboutPage(){
+    base('others').find('rec9gDiJVlpVl5b7Z', function(err, record) {
+        if (err) { console.error(err); return; }
+        console.log('Retrieved', record);
+        //show about text
+        let aboutText = document.getElementsByClassName("about-text")[0];
+        aboutText.innerHTML = record.fields.text;
+        //show contact
+        let aboutContact = document.getElementsByClassName("about-contact")[0];
+        aboutContact.innerHTML = record.fields.contact;
+        //show img
+        let aboutImg = document.getElementsByClassName("about-img")[0];
+        let img = document.createElement("img");
+        img.src = record.fields.image[0].url;
+        img.alt = `${record.fields.image[0].filename}, ${record.fields.image[0].id}`;
+        aboutImg.appendChild(img);
+    });
+}
+
