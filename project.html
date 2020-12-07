@@ -10,15 +10,22 @@
 
     <title></title>
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/loader.css">
     <script src="library/airtable.browser.js"></script>
     <script src="js/sketch.js"></script>
     <script>showTitle();</script>
 </head>
 
-<body id="top">
+<body id="top" onload="loaderTimerLong()">
+    <div id="loader">
+        <div class="lds-ripple"><div></div><div></div></div>
+    </div>
+    <div id="preload-page"></div>
     <header>
         <nav>
+            <div>
+                <a class="name-a" href="index.html"><b>Yujing Shi</b></a>
+            </div>
             <div>
                 <a href="index.html">Main</a>
             </div>
@@ -30,13 +37,13 @@
                 <a href="about.html">About</a>
             </div>
         </nav>
-        <div class="cover-img"></div>
-        <div class="info-tag"></div>
-        <div class="info-wrapper"></div>
     </header>
 
     <main>
         <div class="cover-img"></div>
+        <div class="info-tag"></div>
+        <div class="info-wrapper"></div>
+        <div class="cover-img video-cover"></div>
         <div class="info-tag"></div>
         <div class="project-img"></div>
         <div id="expand"></div>
@@ -51,6 +58,7 @@
     </footer>
 
     <script>showProject();</script>
+    <script>showNav();</script>
 </body>
 
 </html>

@@ -11,11 +11,16 @@
     <title>Works | Yujing Shi</title>
 
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/loader.css">
     <script src="library/airtable.browser.js"></script>
     <script src="js/sketch.js"></script>
 </head>
 
-<body>
+<body onload="loaderTimer()">
+    <div id="loader">
+        <div class="lds-ripple"><div></div><div></div></div>
+    </div>
+    <div id="preload-page"></div>
     <nav>
         <div>
             <a href="index.html">Main</a>
@@ -31,7 +36,10 @@
     <div class="scroll-wrapper"></div>
     <img class="hover-div" src="" />
 
+    <footer></footer>
+    
     <script>listProjects();</script>
+    <script>showNav();</script>
 </body>
 
 </html>

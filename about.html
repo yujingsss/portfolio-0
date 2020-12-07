@@ -11,18 +11,25 @@
     <title>About | Yujing Shi</title>
 
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/loader.css">
     <script src="library/airtable.browser.js"></script>
     <script src="js/sketch.js"></script>
     <script>showAboutPage();</script>
+    <script>showNav();</script>
 </head>
 
-<body>
+<body onload="loaderTimer()">
+    <div id="loader">
+        <div class="lds-ripple"><div></div><div></div></div>
+    </div>
+    <div id="preload-page"></div>
     <nav>
         <div>
             <a href="index.html">Main</a>
         </div>
         <div class="nav-works">
             <button class="navbtn"><a href="works.html">Works</a></button>
+            <div class="sub-nav"></div>
         </div>
         <div>
             <a href="about.html">About</a>
@@ -30,11 +37,9 @@
     </nav>
     <div class="about-page">
         <div class="about-img"></div>
-        <div class="about-text">
-            <!-- <h2>Hello, I am Yujing.</h2> -->
-        </div>
-        <div class="about-contact">
-            <!-- <h2>Contact</h2> -->
+        <div class="about-content">
+            <div class="about-text"></div>
+            <div class="about-contact"></div>
         </div>
     </div>
 </body>

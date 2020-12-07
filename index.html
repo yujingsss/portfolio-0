@@ -11,12 +11,21 @@
     <title>Main | Yujing Shi</title>
 
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/loader.css">
     <script src="library/airtable.browser.js"></script>
     <script src="js/sketch.js"></script>
     <script>showMainVideo();</script>
 </head>
 
-<body>
+<body onload="loaderTimerLong()">
+    <div id="loader">
+        <div class="lds-ripple"><div></div><div></div></div>
+    </div>
+    <div id="preload-page"></div>
+
+    <!-- <a href="#en" data-reload>ENG</a>
+    <a href="#ch" data-reload>中</a> -->
+
     <div class="main-page">
         <nav>
             <div>
@@ -24,6 +33,7 @@
             </div>
             <div class="nav-works">
                 <button class="navbtn"><a href="works.html">Works</a></button>
+                <div class="sub-nav"></div>
             </div>
             <div>
                 <a href="about.html">About</a>
@@ -31,6 +41,8 @@
         </nav>
     </div>
     <div class="main-video"></div>
+
+    <script>showNav();</script>
 </body>
 
 </html>
