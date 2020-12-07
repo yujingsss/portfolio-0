@@ -24,26 +24,8 @@ function noScroll() {
 }
 
 //data airtable
-const enBase = "app9l86cCsmAxsTwf";
-const chBase = "appJBHFTdcJB1DXEO";
-let baseId;
-// baseId = chBase;
-baseId = enBase;
-let lang = {
-    en: {
-        mainid: "recY4frnfxVacQC9M",
-        aboutid: "rec9gDiJVlpVl5b7Z"
-    },
-    ch: {
-        mainid: "",
-        aboutid: ""
-    }
-} 
-let mainId = lang.en.mainid;
-let aboutId = lang.en.aboutid;
-
 var Airtable = require('airtable');
-var base = new Airtable({apiKey: 'key9lokycPO090Rlh'}).base(baseId);
+var base = new Airtable({apiKey: 'key9lokycPO090Rlh'}).base('app9l86cCsmAxsTwf');
 
 function listProjects(){
     base('navigation').select({
@@ -456,7 +438,7 @@ function lightbox(img, index, index2,tableName){
 }
 
 function showMainVideo(){
-    base('others').find(mainId, function(err, record) {
+    base('others').find('recY4frnfxVacQC9M', function(err, record) {
         if (err) { console.error(err); return; }
 
         //show background video
@@ -484,7 +466,7 @@ function showMainVideo(){
     });
 }
 function showAboutPage(){
-    base('others').find(aboutId, function(err, record) {
+    base('others').find('rec9gDiJVlpVl5b7Z', function(err, record) {
         if (err) { console.error(err); return; }
         //show about text
         let aboutText = document.getElementsByClassName("about-text")[0];

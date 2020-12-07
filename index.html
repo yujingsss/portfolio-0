@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/loader.css">
     <script src="library/airtable.browser.js"></script>
-    <script src="js/sketch.js"></script>
-    <script>showMainVideo();</script>
 </head>
 
 <body onload="loaderTimerLong()">
@@ -23,25 +21,24 @@
     </div>
     <div id="preload-page"></div>
 
-    <!-- <a href="#en" data-reload>ENG</a>
-    <a href="#ch" data-reload>中</a> -->
-
     <div class="main-page">
         <nav>
             <div>
-                <a href="index.html">Main</a>
+                <a id="nav1" href="index.html">Main</a>
             </div>
             <div class="nav-works">
-                <button class="navbtn"><a href="works.html">Works</a></button>
+                <button class="navbtn"><a id="nav2" href="works.html">Works</a></button>
                 <div class="sub-nav"></div>
             </div>
             <div>
-                <a href="about.html">About</a>
+                <a id="nav3" href="about.html">About</a>
             </div>
         </nav>
     </div>
     <div class="main-video"></div>
 
+    <script src="js/sketch.js"></script>
+    <script>showMainVideo();</script>
     <script>showNav();</script>
 </body>
 
