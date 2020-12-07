@@ -25,6 +25,12 @@ body {
   }
 
 /* gallery view */
+.gallery-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 .img-container {
     width: 75%;
     overflow: hidden;
@@ -54,8 +60,6 @@ body {
 .img-control p:hover {
     cursor: crosshair;
 }
-
-
 
 a {
     color: black;
@@ -353,6 +357,16 @@ footer p, footer a{
     body {
         margin: 0.5em;
     }
+    .gallery-wrapper {
+        flex-direction: column;
+    }
+    .img-container {
+        width: 85%;
+    }
+    .img-slide {
+        height: 75vh;
+    }
+
     .sub-nav a {
         font-size: 14px;
     }

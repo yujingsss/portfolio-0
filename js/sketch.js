@@ -280,10 +280,9 @@ function showProject(){
                 if (err) { console.error(err); return; }
                 let mainDiv = document.getElementsByTagName("main")[0];
                 mainDiv.innerHTML = "";
-                mainDiv.style.display = "flex";
-                mainDiv.style.flexDirection = "row";
-                mainDiv.style.justifyContent = "center";
-                mainDiv.style.alignItems = "center";
+                let galleryWrapper = document.createElement("div");
+                galleryWrapper.classList.add("gallery-wrapper");
+                mainDiv.appendChild(galleryWrapper);
                 let imgContainer = document.createElement("div");
                 imgContainer.classList.add("img-container");
                 let imgSlide = document.createElement("div");
@@ -305,7 +304,7 @@ function showProject(){
                 imgfirst.src = records[0].fields.image[0].url;
                 imgfirst.alt = `${records[0].fields.img_title}, ${records[0].id}`;
                 imgSlide.appendChild(imgfirst);
-                mainDiv.appendChild(imgContainer);
+                galleryWrapper.appendChild(imgContainer);
                 let control = document.createElement("div")
                 let prev = document.createElement("p");
                 let next = document.createElement("p");
@@ -314,7 +313,7 @@ function showProject(){
                 control.appendChild(prev);
                 control.appendChild(next);
                 control.classList.add("img-control");
-                mainDiv.appendChild(control);
+                galleryWrapper.appendChild(control);
                 //slide control
                 let counter = 1;
                 let gallerySize = imgSlide.clientWidth;
