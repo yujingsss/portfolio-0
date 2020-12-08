@@ -233,28 +233,32 @@ function showProject(){
                         scrolling(detailWrapper);
 
                         let detailImg = document.createElement("img");
-                        detailImg.classList.add("zoom-in");
-                        detailImg.src = records[i].fields.detail_images[0].url;
-                        detailImg.alt = `${records[i].fields.detail_images[0].filename}, ${records[i].fields.detail_images[0].id}`;
-                        detailWrapper.appendChild(detailImg);
+                        if (records[i].fields.detail_images != null){
+                            detailImg.classList.add("zoom-in");
+                            detailImg.src = records[i].fields.detail_images[0].url;
+                            detailImg.alt = `${records[i].fields.detail_images[0].filename}, ${records[i].fields.detail_images[0].id}`;
+                            detailWrapper.appendChild(detailImg);
 
-                        //small detail images
-                        let detailWrapperSmall = document.createElement("div");
-                        detailWrapperSmall.classList.add("detail-wrapper-small");
-                        if (records[i].fields.category[1] == "multiple"){
-                            for (let j = 1; j < records[i].fields.detail_images.length; j ++){
-                                let detailImgSmall = document.createElement("img");
-                                detailImgSmall.classList.add("zoom-in");
-                                detailImgSmall.src = records[i].fields.detail_images[j].url;
-                                detailImgSmall.alt = `${records[i].fields.detail_images[j].filename}, ${records[i].fields.detail_images[j].id}`;
-                                detailWrapperSmall.appendChild(detailImgSmall);
-                                //lightbox
-                                detailImgSmall.addEventListener("click",(event)=>{
-                                    lightbox(detailImgSmall, i, j, record.fields.short_name);
-                                });
-                            } 
-                            detailWrapper.appendChild(detailWrapperSmall);
-                        } 
+                            //small detail images
+                            let detailWrapperSmall = document.createElement("div");
+                            detailWrapperSmall.classList.add("detail-wrapper-small");
+                            if (records[i].fields.category[1] == "multiple") {
+                                for (let j = 1; j < records[i].fields.detail_images.length; j++) {
+                                    let detailImgSmall = document.createElement("img");
+                                    detailImgSmall.classList.add("zoom-in");
+                                    detailImgSmall.src = records[i].fields.detail_images[j].url;
+                                    detailImgSmall.alt = `${records[i].fields.detail_images[j].filename}, ${records[i].fields.detail_images[j].id}`;
+                                    detailWrapperSmall.appendChild(detailImgSmall);
+                                    //lightbox
+                                    detailImgSmall.addEventListener("click", (event) => {
+                                        lightbox(detailImgSmall, i, j, record.fields.short_name);
+                                    });
+                                }
+                                detailWrapper.appendChild(detailWrapperSmall);
+                            }
+                        } else {
+                            detailWrapper.innerHTML = "";
+                        }
 
                         if (records[i].fields.category[2] == "full"){
                             detailWrapper.style.width = "100%";
