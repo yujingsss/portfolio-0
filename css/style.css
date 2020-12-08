@@ -107,17 +107,20 @@ button {
 .external-button button {
     border: 1px solid black;
     min-width: 120px;
-    font-weight: 300;
-    font-size: 1em;
+    font-weight: 500;
+    font-size: 20px;
     padding: 0.5rem 1rem;
     outline: none;
+    border: none;
     border-radius: 1em;
     margin-top: 1em;
-    background: rgba(0,0,0,1);
+    background: rgba(0,0,0,0.8);
     color: white;
+    transition: background 0.5s ease-in-out;
 }
 .external-button button:hover {
     cursor: crosshair;
+    background: rgba(0,0,0,0.5);
 }
 .sub-nav {
     display: none;
