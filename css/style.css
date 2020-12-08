@@ -128,8 +128,22 @@ button {
     padding: 4px;
     margin: 0;
 }
-.nav-works:hover .sub-nav {
+.nav-works {
+    position: relative;
     display: inline;
+    z-index: 1;
+}
+.nav-works:hover .sub-nav {
+    /* display: inline; */
+    display: block;
+    position: absolute;
+    padding: 0.5em 0.25em;
+    background: rgba(255,255,255,0.9);
+}
+.nav-works:hover .sub-nav a {
+    position: relative;
+    display: block;
+    padding-top: 0;
 }
 .info-wrapper {
     height: 60vh;
@@ -388,20 +402,6 @@ footer p, footer a{
 
     .sub-nav a {
         font-size: 14px;
-    }
-    .nav-works {
-        position: relative;
-        display: inline-block;
-    }
-    .nav-works:hover .sub-nav{
-        display: block;
-        padding: 0.5rem;
-        position: absolute;
-        background: rgba(255,255,255,0.9);
-    }
-    .nav-works:hover .sub-nav a {
-        display: block;
-        padding: 0.15rem 0.25rem 0.15rem 0.25rem;
     }
     img {
         padding: 0.25rem;

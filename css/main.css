@@ -63,8 +63,22 @@ nav a:hover {
     padding: 4px;
     margin: 0;
 }
-.nav-works:hover .sub-nav {
+.nav-works {
+    position: relative;
     display: inline;
+    z-index: 1;
+}
+.nav-works:hover .sub-nav {
+    /* display: inline; */
+    display: inline-block;
+    position: absolute;
+    padding-top: 0;
+    background: rgba(0,0,0,0.8);
+}
+.nav-works:hover .sub-nav a {
+    position: relative;
+    display: block;
+    padding-top: 0;
 }
 button {
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -169,22 +183,6 @@ footer {
     }
     .main-video img {
         width: 100%;
-    }
-    .nav-works {
-        position: relative;
-        display: inline;
-        z-index: 1;
-    }
-    .nav-works:hover .sub-nav{
-        display: inline-block;
-        padding: 0 0.25rem 0.25rem 0.25rem;
-        position: absolute;
-        background: rgba(0,0,0,0.75);
-    }
-    .nav-works:hover .sub-nav a {
-        position: relative;
-        display: block;
-        padding: 0.15rem 0.25rem 0.15rem 0.25rem;
     }
 }
 @media screen and (max-width: 420px){

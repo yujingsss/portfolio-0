@@ -49,7 +49,7 @@ function listProjects(){
             let a = document.createElement('a');
             let id = records[i].id;
             a.href = `project.html?${id}`;
-            a.textContent = records[i].fields.short_name;
+            a.textContent = `${records[i].fields.short_name}`;
             a.classList.add("show-on-scroll");
             scrolling(a);
             scrollWrapper.appendChild(a);
