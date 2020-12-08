@@ -300,10 +300,12 @@ img {
 .expand-img{
     height: 90%;
     max-width: 90%;
+    width: 90%;
     z-index: -1;
 }
 .expand-img img {
     height: 100%;
+    width: 100%;
     object-fit: contain;
 }
 .control-div {
