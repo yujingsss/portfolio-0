@@ -279,7 +279,9 @@ function showProject(){
         }
         //for gallery view
         if (record.fields.category[0] == "gallery_view"){
-            base(record.fields.short_name).select().firstPage(showDetail);
+            base(record.fields.short_name).select({
+                sort: [{field: "index", direction: "asc"}]
+            }).firstPage(showDetail);
             function showDetail(err, records){
                 if (err) { console.error(err); return; }
                 let mainDiv = document.getElementsByTagName("main")[0];
