@@ -76,6 +76,7 @@ nav a:hover {
     background: rgba(0,0,0,0.8);
 }
 .nav-works:hover .sub-nav a {
+    min-width: 150px;
     position: relative;
     display: block;
     padding-top: 0;

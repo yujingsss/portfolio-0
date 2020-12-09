@@ -23,9 +23,12 @@ function noScroll() {
     window.scrollTo(0, 0);
 }
 
+
 //data airtable
 var Airtable = require('airtable');
 var base = new Airtable({apiKey: 'key9lokycPO090Rlh'}).base('app9l86cCsmAxsTwf');
+let recordMain = "recY4frnfxVacQC9M";
+let recordAbout = "rec9gDiJVlpVl5b7Z";
 
 function listProjects(){
     base('navigation').select({
@@ -80,6 +83,7 @@ function listProjects(){
 
 function showTitle() {
     let id = window.location.search.substring(1);
+    console.log(id);
     base('navigation').find(id, function(err, record) {
         //show html title
         if (document.title != record.fields.title) {
@@ -443,7 +447,8 @@ function lightbox(img, index, index2,tableName){
 }
 
 function showMainVideo(){
-    base('others').find('recY4frnfxVacQC9M', function(err, record) {
+    // base('others').find('recY4frnfxVacQC9M', function(err, record) {
+    base('others').find(recordMain, function(err, record) {
         if (err) { console.error(err); return; }
 
         //show background video
@@ -471,7 +476,8 @@ function showMainVideo(){
     });
 }
 function showAboutPage(){
-    base('others').find('rec9gDiJVlpVl5b7Z', function(err, record) {
+    // base('others').find('rec9gDiJVlpVl5b7Z', function(err, record) {
+    base('others').find(recordAbout, function(err, record) {
         if (err) { console.error(err); return; }
         //show about text
         let aboutText = document.getElementsByClassName("about-text")[0];
