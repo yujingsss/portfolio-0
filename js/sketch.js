@@ -29,6 +29,7 @@ var Airtable = require('airtable');
 var base = new Airtable({apiKey: 'key9lokycPO090Rlh'}).base('app9l86cCsmAxsTwf');
 let recordMain = "recY4frnfxVacQC9M";
 let recordAbout = "rec9gDiJVlpVl5b7Z";
+let recordLang = "recgUPNPC5avf2HQM";
 
 function listProjects(){
     base('navigation').select({
@@ -110,6 +111,11 @@ function showNav(){
             subNav.appendChild(a);
         }
     }
+    base('others').find(recordLang, function(err, record) {
+        if (err) { console.error(err); return; }
+        let langSwitch = document.getElementById("lang-switch");
+        langSwitch.innerHTML = `<a href="${record.fields.link_en}">EN |</a><a href="${record.fields.link_ch}">中</a>`;
+    });
 }
 
 function showProject(){

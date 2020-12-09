@@ -144,10 +144,18 @@ button {
     background: rgba(255,255,255,0.9);
 }
 .nav-works:hover .sub-nav a {
+    min-width: 135px;
     position: relative;
     display: block;
     padding-top: 0;
 }
+#lang-switch a:nth-of-type(1){
+    padding-right: 0.1em;
+}
+#lang-switch a:nth-of-type(2){
+    padding-left: 0.1em;
+}
+
 .info-wrapper {
     height: 60vh;
     display: flex;
