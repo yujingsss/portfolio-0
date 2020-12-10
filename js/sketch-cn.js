@@ -120,14 +120,14 @@ function showNav(){
 
 function langSwitchInsert(){
     let id = window.location.search.substring(1);
-    console.log(id);
+    // console.log(id);
     let langSwitchA = document.querySelectorAll("#lang-switch > a");
     if (langSwitchA[0].search == ""){
-        console.log(langSwitchA[0].search, langSwitchA[0].href);
+        // console.log(langSwitchA[0].search, langSwitchA[0].href);
         langSwitchA[0].href = `project.html?${id}`;
     }
     if (langSwitchA[1].search == ""){
-        console.log(langSwitchA[1].search, langSwitchA[1].href);
+        // console.log(langSwitchA[1].search, langSwitchA[1].href);
         langSwitchA[1].href = `project-cn.html?${id}`;
     }
 }
