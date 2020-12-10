@@ -26,15 +26,9 @@ function noScroll() {
 
 //data airtable
 var Airtable = require('airtable');
-//ch
-// var base = new Airtable({apiKey: 'key9lokycPO090Rlh'}).base("appFSuhGb9YKUpto3");
-// let recordMain = "recuBBCROexkzNc1A";
-// let recordAbout = "recFNZtdu215I2LZN";
-// let recordLang = "recvdkNJ13nffQPkd";
 var base = new Airtable({ apiKey: 'key9lokycPO090Rlh' }).base('app9l86cCsmAxsTwf');
 let recordMain = "recY4frnfxVacQC9M";
 let recordAbout = "rec9gDiJVlpVl5b7Z";
-let recordLang = "recgUPNPC5avf2HQM";
 
 function listProjects(){
     base('navigation').select({
