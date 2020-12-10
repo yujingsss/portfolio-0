@@ -471,8 +471,17 @@ function lightbox(img, index, index2,tableName){
                 }
             } else {
                 if (records[lightboxindex - 1].fields.detail_images == null) {
-                    lightboxindex -= 2;
-                    lightboxindex2 = records[lightboxindex].fields.detail_images.length - 1;
+                    if (records[lightboxindex].fields.detail_images.length > 1){
+                        if (lightboxindex2 == 0){
+                            lightboxindex -= 2;
+                            lightboxindex2 = records[lightboxindex].fields.detail_images.length - 1;
+                        } else {
+                            lightboxindex2--;
+                        }
+                    } else {
+                        lightboxindex -= 2;
+                        lightboxindex2 = records[lightboxindex].fields.detail_images.length - 1;
+                    }
                 } else {
                     if (lightboxindex2 == 0) {
                         lightboxindex--;
