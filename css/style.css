@@ -33,6 +33,7 @@ body {
 }
 .img-container {
     width: 75%;
+    height: 75%;
     overflow: hidden;
     margin-top: 1.5em;
 }
