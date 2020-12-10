@@ -1,19 +1,19 @@
 //loading page
-function loaderTimer() {
+function loaderTimer(){
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     window.addEventListener('scroll', noScroll);
-    document.getElementById("loader").style.animationDuration = "2s";
-    document.getElementById("preload-page").style.animationDuration = "2s";
+        document.getElementById("loader").style.animationDuration = "2s";
+        document.getElementById("preload-page").style.animationDuration = "2s";
     timervar = setTimeout(showPage, 2000);
 }
-function loaderTimerLong() {
+function loaderTimerLong(){
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     window.addEventListener('scroll', noScroll);
     document.getElementById("loader").style.animationDuration = "4.5s";
     document.getElementById("preload-page").style.animationDuration = "4.5s";
     timervar = setTimeout(showPage, 4500);
 }
-function showPage() {
+function showPage(){
     document.getElementById("preload-page").style.display = "none";
     document.getElementById("loader").style.display = "none";
     window.removeEventListener('scroll', noScroll);
@@ -26,25 +26,30 @@ function noScroll() {
 
 //data airtable
 var Airtable = require('airtable');
+//ch
+// var base = new Airtable({apiKey: 'key9lokycPO090Rlh'}).base("appFSuhGb9YKUpto3");
+// let recordMain = "recuBBCROexkzNc1A";
+// let recordAbout = "recFNZtdu215I2LZN";
+// let recordLang = "recvdkNJ13nffQPkd";
 var base = new Airtable({ apiKey: 'key9lokycPO090Rlh' }).base('app9l86cCsmAxsTwf');
 let recordMain = "recY4frnfxVacQC9M";
 let recordAbout = "rec9gDiJVlpVl5b7Z";
 let recordLang = "recgUPNPC5avf2HQM";
 
-function listProjects() {
+function listProjects(){
     base('navigation').select({
-        sort: [{ field: "index", direction: "asc" }]
-    }).firstPage(onProjects);
+        sort: [{field: "index", direction: "asc"}]
+      }).firstPage(onProjects);
 
-    function onProjects(err, records) {
+    function onProjects(err, records){
         if (err) { console.error(err); return; }
         let subNav = document.getElementsByClassName("sub-nav")[0];
         subNav.innerHTML = "";
         for (let i = 0; i < records.length; i++) {
             let a = document.createElement('a');
             let id = records[i].id;
-            a.href = `project.html?${id}`;
-            a.textContent = records[i].fields.short_name;
+            a.href = `project-cn.html?${id}`;
+            a.textContent = records[i].fields.short_name_cn;
             subNav.appendChild(a);
         }
         let scrollWrapper = document.getElementsByClassName("scroll-wrapper")[0];
@@ -52,8 +57,8 @@ function listProjects() {
         for (let i = 0; i < records.length; i++) {
             let a = document.createElement('a');
             let id = records[i].id;
-            a.href = `project.html?${id}`;
-            a.textContent = `${records[i].fields.short_name}`;
+            a.href = `project-cn.html?${id}`;
+            a.textContent = `${records[i].fields.short_name_cn}`;
             a.classList.add("show-on-scroll");
             scrolling(a);
             scrollWrapper.appendChild(a);
@@ -65,15 +70,15 @@ function listProjects() {
             hoverdiv.style.height = "250px";
             hoverdiv.style.filter = "blur(5px) contrast(150%)";
             hoverdiv.style.borderRadius = "200px";
-            function showHoverDiv(event) {
+            function showHoverDiv (event){
                 hoverdiv.style.display = "block";
                 hoverdiv.src = records[i].fields.cover_image[0].thumbnails.large.url;
                 hoverdiv.style.position = "absolute";
-                hoverdiv.style.top = `${event.pageY - 85}px`;
-                hoverdiv.style.left = `${event.clientX - 85}px`;
+                hoverdiv.style.top = `${event.pageY-85}px`;
+                hoverdiv.style.left = `${event.clientX-85}px`;
                 document.body.appendChild(hoverdiv);
             }
-            a.addEventListener("mouseleave", () => {
+            a.addEventListener("mouseleave", ()=>{
                 hoverdiv.style.display = "none";
                 hoverdiv.src = "";
                 hoverdiv.innerHTML = "";
@@ -85,29 +90,29 @@ function listProjects() {
 function showTitle() {
     let id = window.location.search.substring(1);
     // console.log(id);
-    base('navigation').find(id, function (err, record) {
+    base('navigation').find(id, function(err, record) {
         //show html title
-        if (document.title != record.fields.title) {
-            document.title = record.fields.title;
+        if (document.title != record.fields.title_cn) {
+            document.title = record.fields.title_cn;
         }
     });
 }
 
-function showNav() {
+function showNav(){
     //show nav bar
     base('navigation').select({
-        sort: [{ field: "index", direction: "asc" }]
-    }).firstPage(onProjects);
-
-    function onProjects(err, records) {
+        sort: [{field: "index", direction: "asc"}]
+      }).firstPage(onProjects);
+    
+    function onProjects(err, records){
         if (err) { console.error(err); return; }
         let subNav = document.getElementsByClassName("sub-nav")[0];
         subNav.innerHTML = "";
         for (let i = 0; i < records.length; i++) {
             let a = document.createElement('a');
             let id = records[i].id;
-            a.href = `project.html?${id}`;
-            a.textContent = records[i].fields.short_name;
+            a.href = `project-cn.html?${id}`;
+            a.textContent = records[i].fields.short_name_cn;
             subNav.appendChild(a);
         }
     }
@@ -127,13 +132,14 @@ function langSwitchInsert(){
     }
 }
 
-function showProject() {
+function showProject(){
     let id = window.location.search.substring(1);
     // console.log("id:",id);
-    base('navigation').find(id, function (err, record) {
+
+    base('navigation').find(id, function(err, record) {
         if (err) { console.error(err); return; }
         //for case study
-        if (record.fields.category[0] == "case_study") {
+        if (record.fields.category[0] == "case_study"){
             //show header cover image 0
             let coverImg0 = document.getElementsByClassName("cover-img")[0];
             let img0 = document.createElement("img");
@@ -144,11 +150,11 @@ function showProject() {
 
             //show information
             let info = document.getElementsByClassName("info-wrapper")[0];
-            if (record.fields.information != null) {
+            if (record.fields.information_cn != null){
                 let divLeft = document.createElement("div");
                 let divRight = document.createElement("div");
-                divLeft.innerHTML = `<h1>${record.fields.title}</h1><h2>${record.fields.subtitle}</h2>`;
-                divRight.innerHTML = `<h2>${record.fields.information}</h2>`;
+                divLeft.innerHTML = `<h1>${record.fields.title_cn}</h1><h2>${record.fields.subtitle_cn}</h2>`;
+                divRight.innerHTML = `<h2>${record.fields.information_cn}</h2>`;
                 info.appendChild(divLeft);
                 info.appendChild(divRight);
             }
@@ -160,11 +166,11 @@ function showProject() {
             img1.src = record.fields.cover_image[1].url;
             img1.alt = `${record.fields.cover_image[1].filename},${record.fields.cover_image[1].id}`;
             coverImg1.appendChild(img1);
-            if (record.fields.video != null) {
+            if (record.fields.video != null){
                 img1.classList.add("zoom-in-cover", "cover");
                 let videoWrapper = document.createElement("div");
                 videoWrapper.classList.add("video-wrapper");
-                videoWrapper.innerHTML = record.fields.video;
+                videoWrapper.innerHTML = record.fields.video_cn;
                 coverImg1.appendChild(videoWrapper);
             } else {
                 // console.log("no video");
@@ -177,33 +183,34 @@ function showProject() {
             liTitle.classList.add("info-tag-title");
             let liCreator = document.createElement("li");
             let liYear = document.createElement("li");
-            liTitle.innerText = record.fields.title;
+            liTitle.innerText = record.fields.title_cn;
             liCreator.innerText = record.fields.creator;
             liYear.innerText = record.fields.year;
             infoTag0.appendChild(liTitle);
             infoTag0.appendChild(liCreator);
             infoTag0.appendChild(liYear);
             let infoTag = document.getElementsByClassName("info-tag")[1];
-            if (record.fields.info_tag != null) {
-                infoTag.innerHTML = record.fields.info_tag;
+            if (record.fields.info_tag_cn != null){
+                infoTag.innerHTML = record.fields.info_tag_cn;
             }
 
             //show detail images
             let projectImg = document.getElementsByClassName("project-img")[0];
+            //english shortname used for table name
             base(record.fields.short_name).select({
-                sort: [{ field: "index", direction: "asc" }]
+                sort: [{field: "index", direction: "asc"}]
             }).firstPage(showDetail);
-            function showDetail(err, records) {
+            function showDetail(err, records){
                 if (err) { console.error(err); return; }
-                for (let i = 0; i < records.length; i++) {
+                for (let i = 0; i < records.length; i++){
                     //show flex
-                    if (records[i].fields.category[0] == "flex") {
+                    if (records[i].fields.category[0] == "flex"){
                         let photoDiv = document.createElement("div");
                         photoDiv.style.width = "100%";
                         photoDiv.style.display = "flex";
                         photoDiv.style.flexDirection = "row";
                         photoDiv.style.flexWrap = "wrap";
-                        for (let j = 0; j < records[i].fields.detail_images.length; j++) {
+                        for (let j = 0; j < records[i].fields.detail_images.length; j++){
                             let photoImgDiv = document.createElement("div");
                             photoImgDiv.style.flex = "1";
                             let photoImg = document.createElement("img");
@@ -215,16 +222,17 @@ function showProject() {
                             photoImgDiv.appendChild(photoImg);
                             photoDiv.appendChild(photoImgDiv);
                             //lightbox
-                            photoImg.addEventListener("click", (event) => {
+                            photoImg.addEventListener("click",(event)=>{
+                                //this shortname is for tablename
                                 lightbox(photoImg, i, j, record.fields.short_name);
                             });
                             //show photo text
-                            if (j == records[i].fields.detail_images.length - 1) {
-                                if (records[i].fields.detail_text != null) {
+                            if (j == records[i].fields.detail_images.length-1){
+                                if (records[i].fields.detail_text_cn != null){
                                     let photoText = document.createElement("div");
                                     photoText.style.paddingRight = "0.5rem";
                                     photoText.style.textAlign = "right";
-                                    photoText.innerHTML = records[i].fields.detail_text;
+                                    photoText.innerHTML = records[i].fields.detail_text_cn;
                                     photoImgDiv.appendChild(photoText);
                                 }
                             }
@@ -232,18 +240,18 @@ function showProject() {
                         projectImg.appendChild(photoDiv);
                     } else {
                         let textImgWrapper = document.createElement("div");
-                        if (records[i].fields.category[0] == "left") {
+                        if (records[i].fields.category[0] == "left"){
                             textImgWrapper.classList.add("text-img-wrapper");
                         } else if (records[i].fields.category[0] == "right") {
                             textImgWrapper.classList.add("img-text-wrapper");
-                        }
-
+                        } 
+                
                         let descriptionText = document.createElement("div");
                         descriptionText.classList.add("description-text");
-                        if (records[i].fields.detail_text != null) {
-                            descriptionText.innerHTML = records[i].fields.detail_text;
+                        if (records[i].fields.detail_text_cn != null){
+                            descriptionText.innerHTML = records[i].fields.detail_text_cn;
                         } else {
-                            descriptionText.innerHTML = "";
+                            descriptionText.innerHTML = ""; 
                         }
 
                         let detailWrapper = document.createElement("div");
@@ -251,7 +259,7 @@ function showProject() {
                         scrolling(detailWrapper);
 
                         let detailImg = document.createElement("img");
-                        if (records[i].fields.detail_images != null) {
+                        if (records[i].fields.detail_images != null){
                             detailImg.classList.add("zoom-in");
                             detailImg.src = records[i].fields.detail_images[0].url;
                             detailImg.alt = `${records[i].fields.detail_images[0].filename}, ${records[i].fields.detail_images[0].id}`;
@@ -269,6 +277,7 @@ function showProject() {
                                     detailWrapperSmall.appendChild(detailImgSmall);
                                     //lightbox
                                     detailImgSmall.addEventListener("click", (event) => {
+                                        //this shortname is for tablename
                                         lightbox(detailImgSmall, i, j, record.fields.short_name);
                                     });
                                 }
@@ -278,17 +287,18 @@ function showProject() {
                             detailWrapper.innerHTML = "";
                         }
 
-                        if (records[i].fields.category[2] == "full") {
+                        if (records[i].fields.category[2] == "full"){
                             detailWrapper.style.width = "100%";
                             descriptionText.style.display = "none";
                         }
-
+                    
                         textImgWrapper.appendChild(descriptionText);
                         textImgWrapper.appendChild(detailWrapper);
                         projectImg.appendChild(textImgWrapper);
 
                         //lightbox
-                        detailImg.addEventListener("click", (event) => {
+                        detailImg.addEventListener("click", (event)=>{
+                            //this shortname is for tablename
                             lightbox(detailImg, i, 0, record.fields.short_name);
                         });
                     }
@@ -296,11 +306,12 @@ function showProject() {
             }
         }
         //for gallery view
-        if (record.fields.category[0] == "gallery_view") {
+        if (record.fields.category[0] == "gallery_view"){
+            //this shortname is for tablename
             base(record.fields.short_name).select({
-                sort: [{ field: "index", direction: "asc" }]
+                sort: [{field: "index", direction: "asc"}]
             }).firstPage(showDetail);
-            function showDetail(err, records) {
+            function showDetail(err, records){
                 if (err) { console.error(err); return; }
                 let mainDiv = document.getElementsByTagName("main")[0];
                 mainDiv.innerHTML = "";
@@ -314,16 +325,16 @@ function showProject() {
                 imgContainer.appendChild(imgSlide);
 
                 let imglast = document.createElement("img");
-                imglast.src = records[records.length - 1].fields.image[0].url;
-                imglast.alt = `${records[records.length - 1].fields.img_title}, ${records[records.length - 1].id}`;
+                imglast.src = records[records.length-1].fields.image[0].url;
+                imglast.alt = `${records[records.length-1].fields.img_title}, ${records[records.length-1].id}`;
                 imgSlide.appendChild(imglast);
-                records.forEach(record => {
+                records.forEach(record =>{
                     let img = document.createElement("img");
                     img.src = record.fields.image[0].url;
                     img.alt = `${record.fields.img_title}, ${record.id}`;
                     img.title = record.fields.img_title;
                     imgSlide.appendChild(img);
-                });
+                });               
                 let imgfirst = document.createElement("img");
                 imgfirst.src = records[0].fields.image[0].url;
                 imgfirst.alt = `${records[0].fields.img_title}, ${records[0].id}`;
@@ -332,8 +343,8 @@ function showProject() {
                 let control = document.createElement("div")
                 let prev = document.createElement("p");
                 let next = document.createElement("p");
-                prev.innerText = "prev";
-                next.innerText = "next";
+                prev.innerText = "前";
+                next.innerText = "后";
                 control.appendChild(prev);
                 control.appendChild(next);
                 control.classList.add("img-control");
@@ -341,51 +352,51 @@ function showProject() {
                 //slide control
                 let counter = 1;
                 let gallerySize = imgSlide.clientWidth;
-                window.addEventListener('resize', () => {
+                window.addEventListener('resize',()=>{
                     gallerySize = imgSlide.clientWidth;
                 });
-                imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                imgSlide.style.transform = `translateX(${-gallerySize*counter}px)`;
                 setInterval(sliding, 4000);
-                function sliding() {
+                function sliding(){
                     if (counter >= records.length + 1) return;
-                    counter++;
+                    counter ++;
                     imgSlide.style.transition = "transform 0.6s ease-in-out";
-                    imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
-                    imgSlide.addEventListener("transitionend", () => {
-                        if (counter == 0) {
+                    imgSlide.style.transform = `translateX(${-gallerySize*counter}px)`;
+                    imgSlide.addEventListener("transitionend", ()=>{
+                        if (counter == 0){
                             imgSlide.style.transition = "none";
                             counter = records.length;
-                            imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                            imgSlide.style.transform = `translateX(${-gallerySize*counter}px)`;
                         }
-                        if (counter == records.length + 1) {
+                        if (counter == records.length + 1){
                             imgSlide.style.transition = "none";
                             counter = records.length + 2 - counter;
-                            imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                            imgSlide.style.transform = `translateX(${-gallerySize*counter}px)`;
                         }
                     });
                 }
-                prev.addEventListener("click", () => {
+                prev.addEventListener("click",()=>{
                     if (counter <= 0) return;
-                    counter--;
+                    counter --;
                     imgSlide.style.transition = "transform 0.4s ease-in-out";
-                    imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                    imgSlide.style.transform = `translateX(${-gallerySize*counter}px)`;
                 });
-                next.addEventListener("click", () => {
+                next.addEventListener("click",()=>{
                     if (counter >= records.length + 1) return;
-                    counter++;
+                    counter ++;
                     imgSlide.style.transition = "transform 0.4s ease-in-out";
-                    imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                    imgSlide.style.transform = `translateX(${-gallerySize*counter}px)`;
                 });
-                imgSlide.addEventListener("transitionend", () => {
-                    if (counter == 0) {
+                imgSlide.addEventListener("transitionend", ()=>{
+                    if (counter == 0){
                         imgSlide.style.transition = "none";
                         counter = records.length;
-                        imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                        imgSlide.style.transform = `translateX(${-gallerySize*counter}px)`;
                     }
-                    if (counter == records.length + 1) {
+                    if (counter == records.length + 1){
                         imgSlide.style.transition = "none";
                         counter = records.length + 2 - counter;
-                        imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                        imgSlide.style.transform = `translateX(${-gallerySize*counter}px)`;
                     }
                 });
             }
@@ -393,7 +404,7 @@ function showProject() {
     });
 }
 
-function lightbox(img, index, index2, tableName) {
+function lightbox(img, index, index2,tableName){
     let expand = document.getElementById("expand");
     expand.style.display = "flex";
     let imgdiv = document.createElement("div");
@@ -412,21 +423,21 @@ function lightbox(img, index, index2, tableName) {
     backdiv.classList.add("back-div");
     expand.appendChild(backdiv);
     base(tableName).select({
-        sort: [{ field: "index", direction: "asc" }]
+        sort: [{field: "index", direction: "asc"}]
     }).firstPage(lightboxImage);
-    function lightboxImage(err, records) {
+    function lightboxImage(err, records){
         if (err) { console.error(err); return; }
         let lightboxindex = index;
         let lightboxindex2 = index2;
         rightdiv.addEventListener("click", () => {
-            if (records[lightboxindex].fields.detail_images.length > 1) {
-                lightboxindex2++;
+            if (records[lightboxindex].fields.detail_images.length > 1){
+                lightboxindex2 ++;
                 lightboxindex2 = lightboxindex2 % records[lightboxindex].fields.detail_images.length;
-                if (lightboxindex2 == 0) {
-                    lightboxindex++;
-                }
+                if (lightboxindex2 == 0){
+                    lightboxindex ++;
+                } 
             } else {
-                lightboxindex++;
+                lightboxindex ++;
                 lightboxindex = lightboxindex % records.length;
             }
             if (lightboxindex == records.length) {
@@ -435,20 +446,21 @@ function lightbox(img, index, index2, tableName) {
             imgdiv.innerHTML = `<img class="zoom-in" src="${records[lightboxindex].fields.detail_images[lightboxindex2].url}" />`;
         });
         leftdiv.addEventListener("click", () => {
-            if (lightboxindex2 == 0) {
-                lightboxindex--;
-                if (lightboxindex < 0) {
+            if (lightboxindex2 == 0){
+                lightboxindex --;
+                if (lightboxindex < 0){
                     lightboxindex = records.length - 1;
-                }
+                } 
                 lightboxindex2 = records[lightboxindex].fields.detail_images.length - 1;
             } else {
-                lightboxindex2--;
+                lightboxindex2 --;
             }
             imgdiv.innerHTML = `<img class="zoom-in" src="${records[lightboxindex].fields.detail_images[lightboxindex2].url}" />`;
+            // console.log("recordindexL", lightboxindex,records[lightboxindex].fields.index, "imageindex", lightboxindex2);
         });
     }
 
-    document.getElementById("back").addEventListener("click", () => {
+    document.getElementById("back").addEventListener("click",()=>{
         expand.style.display = "none";
         imgdiv.style.display = "none";
         imgdiv.innerHTML = "";
@@ -459,9 +471,9 @@ function lightbox(img, index, index2, tableName) {
     });
 }
 
-function showMainVideo() {
+function showMainVideo(){
     // base('others').find('recY4frnfxVacQC9M', function(err, record) {
-    base('others').find(recordMain, function (err, record) {
+    base('others').find(recordMain, function(err, record) {
         if (err) { console.error(err); return; }
 
         //show background video
@@ -476,11 +488,11 @@ function showMainVideo() {
             videoGif.alt = "";
             videoGif.style.zIndex = videoGifzIndex;
             bgWrapper.appendChild(videoGif);
-            videoGif.addEventListener("click", (event) => {
-                videoGifzIndex++;
+            videoGif.addEventListener("click", (event)=>{
+                videoGifzIndex ++;
                 console.log(videoGifzIndex);
-                if (videoGifzIndex >= record.fields.image.length) {
-                    window.location.assign("works.html");
+                if (videoGifzIndex >= record.fields.image.length){
+                    window.location.assign("works-cn.html");
                 } else {
                     videoGif.style.zIndex = -videoGifzIndex;
                 }
@@ -488,13 +500,13 @@ function showMainVideo() {
         });
     });
 }
-function showAboutPage() {
+function showAboutPage(){
     // base('others').find('rec9gDiJVlpVl5b7Z', function(err, record) {
-    base('others').find(recordAbout, function (err, record) {
+    base('others').find(recordAbout, function(err, record) {
         if (err) { console.error(err); return; }
         //show about text
         let aboutText = document.getElementsByClassName("about-text")[0];
-        aboutText.innerHTML = record.fields.text;
+        aboutText.innerHTML = record.fields.text_cn;
         let aboutContact = document.getElementsByClassName("about-contact")[0];
         let emailA = document.createElement("a");
         emailA.href = record.fields.email;
@@ -522,13 +534,13 @@ function showAboutPage() {
 }
 
 //scrolling
-function scrolling(onScrollEl) {
+function scrolling(onScrollEl){
     let scroll = window.requestAnimationFrame ||
-        function (callback) {
-            window.setTimeout(callback, 1000 / 60);
-        };
+    function(callback) {
+        window.setTimeout(callback,1000/60);
+    };
     function loop() {
-        if (isElementInViewport(onScrollEl)) {
+        if (isElementInViewport(onScrollEl)){
             onScrollEl.classList.add("is-visible");
         } else {
             onScrollEl.classList.remove("is-visible");
@@ -536,19 +548,19 @@ function scrolling(onScrollEl) {
         scroll(loop);
     }
     loop();
-    function isElementInViewport(el) {
-        if (typeof JQery === "function" && el instanceof JQuery) {
+    function isElementInViewport(el){
+        if(typeof JQery === "function" && el instanceof JQuery){
             el = el[0];
         }
         let rect = el.getBoundingClientRect();
         return (
-            (rect.top <= 0 && rect.bottom >= 0)
+            (rect.top <= 0 && rect.bottom >= 0) 
             ||
             (rect.bottom >= (window.innerHeight || document
-                .documentElement.clientHeight) &&
-                rect.top <= (window.innerHeight || document.documentElement
+                .documentElement.clientHeight) && 
+            rect.top <= (window.innerHeight || document.documentElement
                     .clientHeight))
-            ||
+            || 
             (rect.top >= 0 &&
                 rect.bottom <= (window.innerHeight || document
                     .documentElement.clientHeight))
