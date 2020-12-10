@@ -430,47 +430,62 @@ function lightbox(img, index, index2,tableName){
         let lightboxindex = index;
         let lightboxindex2 = index2;
         rightdiv.addEventListener("click", () => {
-            if (records[lightboxindex + 1].fields.detail_images == null) {
+            if (lightboxindex == records.length - 1) {
                 if (records[lightboxindex].fields.detail_images.length > 1) {
                     lightboxindex2++;
                     lightboxindex2 = lightboxindex2 % records[lightboxindex].fields.detail_images.length;
                     if (lightboxindex2 == 0) {
-                        lightboxindex += 2;
+                        lightboxindex = 0;
                     }
                 } else {
-                    lightboxindex += 2;
-                    lightboxindex2 = 0;
+                    lightboxindex = 0;
                 }
             } else {
-                if (records[lightboxindex].fields.detail_images.length > 1) {
-                    lightboxindex2++;
-                    lightboxindex2 = lightboxindex2 % records[lightboxindex].fields.detail_images.length;
-                    if (lightboxindex2 == 0) {
-                        lightboxindex++;
+                if (records[lightboxindex + 1].fields.detail_images == null) {
+                    if (records[lightboxindex].fields.detail_images.length > 1) {
+                        lightboxindex2++;
+                        lightboxindex2 = lightboxindex2 % records[lightboxindex].fields.detail_images.length;
+                        if (lightboxindex2 == 0) {
+                            lightboxindex += 2;
+                        }
+                    } else {
+                        lightboxindex += 2;
+                        lightboxindex2 = 0;
                     }
                 } else {
-                    lightboxindex++;
-                    lightboxindex = lightboxindex % records.length;
+                    if (records[lightboxindex].fields.detail_images.length > 1) {
+                        lightboxindex2++;
+                        lightboxindex2 = lightboxindex2 % records[lightboxindex].fields.detail_images.length;
+                        if (lightboxindex2 == 0) {
+                            lightboxindex++;
+                        }
+                    } else {
+                        lightboxindex++;
+                        lightboxindex = lightboxindex % records.length;
+                    }
                 }
-            }
-            if (lightboxindex == records.length) {
-                lightboxindex = 0;
             }
             imgdiv.innerHTML = `<img class="zoom-in" src="${records[lightboxindex].fields.detail_images[lightboxindex2].url}" />`;
         });
         leftdiv.addEventListener("click", () => {
-            if (records[lightboxindex - 1].fields.detail_images == null) {
-                lightboxindex -= 2;
-                lightboxindex2 = records[lightboxindex].fields.detail_images.length - 1;
-            } else {
+            if (lightboxindex == 0) {
                 if (lightboxindex2 == 0) {
-                    lightboxindex--;
-                    if (lightboxindex < 0) {
-                        lightboxindex = records.length - 1;
-                    }
+                    lightboxindex = records.length - 1;
                     lightboxindex2 = records[lightboxindex].fields.detail_images.length - 1;
                 } else {
                     lightboxindex2--;
+                }
+            } else {
+                if (records[lightboxindex - 1].fields.detail_images == null) {
+                    lightboxindex -= 2;
+                    lightboxindex2 = records[lightboxindex].fields.detail_images.length - 1;
+                } else {
+                    if (lightboxindex2 == 0) {
+                        lightboxindex--;
+                        lightboxindex2 = records[lightboxindex].fields.detail_images.length - 1;
+                    } else {
+                        lightboxindex2--;
+                    }
                 }
             }
             imgdiv.innerHTML = `<img class="zoom-in" src="${records[lightboxindex].fields.detail_images[lightboxindex2].url}" />`;
