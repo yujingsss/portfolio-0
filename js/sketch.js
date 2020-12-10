@@ -115,14 +115,14 @@ function showNav() {
 
 function langSwitchInsert(){
     let id = window.location.search.substring(1);
-    console.log(id);
+    // console.log(id);
     let langSwitchA = document.querySelectorAll("#lang-switch > a");
     if (langSwitchA[0].search == ""){
-        console.log(langSwitchA[0].search, langSwitchA[0].href);
+        // console.log(langSwitchA[0].search, langSwitchA[0].href);
         langSwitchA[0].href = `project.html?${id}`;
     }
     if (langSwitchA[1].search == ""){
-        console.log(langSwitchA[1].search, langSwitchA[1].href);
+        // console.log(langSwitchA[1].search, langSwitchA[1].href);
         langSwitchA[1].href = `project-cn.html?${id}`;
     }
 }
@@ -418,16 +418,30 @@ function lightbox(img, index, index2, tableName) {
         if (err) { console.error(err); return; }
         let lightboxindex = index;
         let lightboxindex2 = index2;
+        console.log(records, records.length);
         rightdiv.addEventListener("click", () => {
-            if (records[lightboxindex].fields.detail_images.length > 1) {
-                lightboxindex2++;
-                lightboxindex2 = lightboxindex2 % records[lightboxindex].fields.detail_images.length;
-                if (lightboxindex2 == 0) {
-                    lightboxindex++;
+            if (records[lightboxindex + 1].fields.detail_images == null) {
+                if (records[lightboxindex].fields.detail_images.length > 1) {
+                    lightboxindex2++;
+                    lightboxindex2 = lightboxindex2 % records[lightboxindex].fields.detail_images.length;
+                    if (lightboxindex2 == 0) {
+                        lightboxindex += 2;
+                    }
+                } else {
+                    lightboxindex += 2;
+                    lightboxindex2 = 0;
                 }
             } else {
-                lightboxindex++;
-                lightboxindex = lightboxindex % records.length;
+                if (records[lightboxindex].fields.detail_images.length > 1) {
+                    lightboxindex2++;
+                    lightboxindex2 = lightboxindex2 % records[lightboxindex].fields.detail_images.length;
+                    if (lightboxindex2 == 0) {
+                        lightboxindex++;
+                    }
+                } else {
+                    lightboxindex++;
+                    lightboxindex = lightboxindex % records.length;
+                }
             }
             if (lightboxindex == records.length) {
                 lightboxindex = 0;
@@ -435,14 +449,19 @@ function lightbox(img, index, index2, tableName) {
             imgdiv.innerHTML = `<img class="zoom-in" src="${records[lightboxindex].fields.detail_images[lightboxindex2].url}" />`;
         });
         leftdiv.addEventListener("click", () => {
-            if (lightboxindex2 == 0) {
-                lightboxindex--;
-                if (lightboxindex < 0) {
-                    lightboxindex = records.length - 1;
-                }
+            if (records[lightboxindex - 1].fields.detail_images == null) {
+                lightboxindex -= 2;
                 lightboxindex2 = records[lightboxindex].fields.detail_images.length - 1;
             } else {
-                lightboxindex2--;
+                if (lightboxindex2 == 0) {
+                    lightboxindex--;
+                    if (lightboxindex < 0) {
+                        lightboxindex = records.length - 1;
+                    }
+                    lightboxindex2 = records[lightboxindex].fields.detail_images.length - 1;
+                } else {
+                    lightboxindex2--;
+                }
             }
             imgdiv.innerHTML = `<img class="zoom-in" src="${records[lightboxindex].fields.detail_images[lightboxindex2].url}" />`;
         });
