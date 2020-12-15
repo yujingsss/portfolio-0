@@ -30,22 +30,13 @@ var base = new Airtable({ apiKey: 'key9lokycPO090Rlh' }).base('app9l86cCsmAxsTwf
 let recordMain = "recY4frnfxVacQC9M";
 let recordAbout = "rec9gDiJVlpVl5b7Z";
 
-function listProjects(){
-    base('navigation').select({
+function listProjects(tableTitle){
+    base(tableTitle).select({
         sort: [{field: "index", direction: "asc"}]
       }).firstPage(onProjects);
 
     function onProjects(err, records){
         if (err) { console.error(err); return; }
-        let subNav = document.getElementsByClassName("sub-nav")[0];
-        subNav.innerHTML = "";
-        for (let i = 0; i < records.length; i++) {
-            let a = document.createElement('a');
-            let id = records[i].id;
-            a.href = `project-cn.html?${id}`;
-            a.textContent = records[i].fields.short_name_cn;
-            subNav.appendChild(a);
-        }
         let scrollWrapper = document.getElementsByClassName("scroll-wrapper")[0];
         scrollWrapper.innerHTML = "";
         for (let i = 0; i < records.length; i++) {
@@ -84,7 +75,7 @@ function listProjects(){
 function showTitle() {
     let id = window.location.search.substring(1);
     // console.log(id);
-    base('navigation').find(id, function(err, record) {
+    base("navigation").find(id, function(err, record) {
         //show html title
         if (document.title != record.fields.title_cn) {
             document.title = record.fields.title_cn;
@@ -94,13 +85,28 @@ function showTitle() {
 
 function showNav(){
     //show nav bar
-    base('navigation').select({
+    base("navigation").select({
         sort: [{field: "index", direction: "asc"}]
       }).firstPage(onProjects);
     
     function onProjects(err, records){
         if (err) { console.error(err); return; }
         let subNav = document.getElementsByClassName("sub-nav")[0];
+        subNav.innerHTML = "";
+        for (let i = 0; i < records.length; i++) {
+            let a = document.createElement('a');
+            let id = records[i].id;
+            a.href = `project-cn.html?${id}`;
+            a.textContent = records[i].fields.short_name_cn;
+            subNav.appendChild(a);
+        }
+    }
+    base('navigation-photo').select({
+        sort: [{ field: "index", direction: "asc" }]
+    }).firstPage(onPhotoProjects);
+    function onPhotoProjects(err, records){
+        if (err) { console.error(err); return; }
+        let subNav = document.getElementsByClassName("sub-nav")[1];
         subNav.innerHTML = "";
         for (let i = 0; i < records.length; i++) {
             let a = document.createElement('a');
@@ -126,11 +132,11 @@ function langSwitchInsert(){
     }
 }
 
-function showProject(){
+function showProject(tableTitle){
     let id = window.location.search.substring(1);
     // console.log("id:",id);
 
-    base('navigation').find(id, function(err, record) {
+    base(tableTitle).find(id, function(err, record) {
         if (err) { console.error(err); return; }
         //for case study
         if (record.fields.category[0] == "case_study"){
@@ -163,9 +169,11 @@ function showProject(){
             if (record.fields.video != null){
                 img1.classList.add("zoom-in-cover", "cover");
                 let videoWrapper = document.createElement("div");
+                videoWrapper.style.height = "calc(53.75vw)";
                 videoWrapper.classList.add("video-wrapper");
                 videoWrapper.innerHTML = record.fields.video_cn;
                 coverImg1.appendChild(videoWrapper);
+                checkVideoSize(coverImg1, videoWrapper);
             } else {
                 // console.log("no video");
                 img1.classList.add("zoom-in-cover");
@@ -396,6 +404,17 @@ function showProject(){
             }
         }
     });
+}
+
+function checkVideoSize(coverImg1, videoWrapper){
+    let videoWidth = coverImg1.clientWidth;
+    let videoHeight = coverImg1.clientHeight;
+    window.addEventListener('resize', () => {
+        videoWidth = coverImg1.clientWidth;
+        videoHeight = coverImg1.clientHeight;
+    });
+    videoWrapper.style.width = videoWidth;
+    videoWrapper.style.height = videoHeight;
 }
 
 function lightbox(img, index, index2,tableName){

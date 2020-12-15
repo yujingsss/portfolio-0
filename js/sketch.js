@@ -2,16 +2,16 @@
 function loaderTimer() {
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     window.addEventListener('scroll', noScroll);
-    document.getElementById("loader").style.animationDuration = "2s";
-    document.getElementById("preload-page").style.animationDuration = "2s";
-    timervar = setTimeout(showPage, 2000);
+    document.getElementById("loader").style.animationDuration = "1.25s";
+    document.getElementById("preload-page").style.animationDuration = "1.25s";
+    timervar = setTimeout(showPage, 1250);
 }
 function loaderTimerLong() {
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     window.addEventListener('scroll', noScroll);
-    document.getElementById("loader").style.animationDuration = "4.5s";
-    document.getElementById("preload-page").style.animationDuration = "4.5s";
-    timervar = setTimeout(showPage, 4500);
+    document.getElementById("loader").style.animationDuration = "4s";
+    document.getElementById("preload-page").style.animationDuration = "4s";
+    timervar = setTimeout(showPage, 4000);
 }
 function showPage() {
     document.getElementById("preload-page").style.display = "none";
@@ -30,22 +30,13 @@ var base = new Airtable({ apiKey: 'key9lokycPO090Rlh' }).base('app9l86cCsmAxsTwf
 let recordMain = "recY4frnfxVacQC9M";
 let recordAbout = "rec9gDiJVlpVl5b7Z";
 
-function listProjects() {
-    base('navigation').select({
+function listProjects(tableTitle) {
+    base(tableTitle).select({
         sort: [{ field: "index", direction: "asc" }]
     }).firstPage(onProjects);
 
     function onProjects(err, records) {
         if (err) { console.error(err); return; }
-        let subNav = document.getElementsByClassName("sub-nav")[0];
-        subNav.innerHTML = "";
-        for (let i = 0; i < records.length; i++) {
-            let a = document.createElement('a');
-            let id = records[i].id;
-            a.href = `project.html?${id}`;
-            a.textContent = records[i].fields.short_name;
-            subNav.appendChild(a);
-        }
         let scrollWrapper = document.getElementsByClassName("scroll-wrapper")[0];
         scrollWrapper.innerHTML = "";
         for (let i = 0; i < records.length; i++) {
@@ -110,6 +101,21 @@ function showNav() {
             subNav.appendChild(a);
         }
     }
+    base('navigation-photo').select({
+        sort: [{ field: "index", direction: "asc" }]
+    }).firstPage(onPhotoProjects);
+    function onPhotoProjects(err, records){
+        if (err) { console.error(err); return; }
+        let subNav = document.getElementsByClassName("sub-nav")[1];
+        subNav.innerHTML = "";
+        for (let i = 0; i < records.length; i++) {
+            let a = document.createElement('a');
+            let id = records[i].id;
+            a.href = `project.html?${id}`;
+            a.textContent = records[i].fields.short_name;
+            subNav.appendChild(a);
+        }
+    }
 }
 
 function langSwitchInsert(){
@@ -126,10 +132,10 @@ function langSwitchInsert(){
     }
 }
 
-function showProject() {
+function showProject(tableTitle) {
     let id = window.location.search.substring(1);
     // console.log("id:",id);
-    base('navigation').find(id, function (err, record) {
+    base(tableTitle).find(id, function (err, record) {
         if (err) { console.error(err); return; }
         //for case study
         if (record.fields.category[0] == "case_study") {
@@ -162,9 +168,11 @@ function showProject() {
             if (record.fields.video != null) {
                 img1.classList.add("zoom-in-cover", "cover");
                 let videoWrapper = document.createElement("div");
+                videoWrapper.style.height = "calc(53.75vw)";
                 videoWrapper.classList.add("video-wrapper");
                 videoWrapper.innerHTML = record.fields.video;
                 coverImg1.appendChild(videoWrapper);
+                checkVideoSize(coverImg1, videoWrapper);
             } else {
                 // console.log("no video");
                 img1.classList.add("zoom-in-cover");
@@ -390,6 +398,17 @@ function showProject() {
             }
         }
     });
+}
+
+function checkVideoSize(coverImg1, videoWrapper){
+    let videoWidth = coverImg1.clientWidth;
+    let videoHeight = coverImg1.clientHeight;
+    window.addEventListener('resize', () => {
+        videoWidth = coverImg1.clientWidth;
+        videoHeight = coverImg1.clientHeight;
+    });
+    videoWrapper.style.width = videoWidth;
+    videoWrapper.style.height = videoHeight;
 }
 
 function lightbox(img, index, index2, tableName) {

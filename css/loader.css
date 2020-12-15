@@ -1,5 +1,10 @@
-
-.lds-ripple {
+.loader-b > .lds-ripple div {
+  border: 4px solid #fff;
+}
+.loader-w > .lds-ripple div {
+  border: 4px solid #000;
+}
+  .lds-ripple {
     display: inline-block;
     position: relative;
     width: 80px;
@@ -8,7 +13,7 @@
   }
   .lds-ripple div {
     position: absolute;
-    border: 4px solid #fff;
+    /* border: 4px solid #fff; */
     opacity: 1;
     border-radius: 50%;
     animation: lds-ripple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -41,22 +46,28 @@
     position: absolute;
     top: 0;
     left: 0;
-    background:
-    linear-gradient(rgb(145, 0, 0), transparent),
-    linear-gradient(to top left, rgb(0, 0, 0), transparent),
-    linear-gradient(to top right, rgb(0, 0, 131), transparent);
-    background-blend-mode: screen;
-    opacity: 1;
-    animation-name: loading;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.loader-b {
+  background:
+  linear-gradient(rgb(145, 0, 0), transparent),
+  linear-gradient(to top left, rgb(0, 0, 0), transparent),
+  linear-gradient(to top right, rgb(0, 0, 131), transparent);
+  background-blend-mode: screen;
+  opacity: 1;
+  animation-name: loading;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
 @keyframes loading {
-    50% {opacity: 1;}
-    100% {opacity: 0;}
+  50% {opacity: 1;}
+  100% {opacity: 0;}
+}
+.loader-w {
+  background: white;
+  opacity: 1;
 }
 #preload-page {
     background: black;

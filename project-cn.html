@@ -14,11 +14,15 @@
     <script src="library/airtable.browser.js"></script>
 </head>
 
-<body id="top" onload="loaderTimerLong()">
-    <div id="loader">
-        <div class="lds-ripple"><div></div><div></div></div>
+<body id="top">
+<!-- <body id="top" onload="loaderTimer()"> -->
+    <!-- <div id="loader" class="loader-w">
+        <div class="lds-ripple">
+            <div></div>
+            <div></div>
+        </div>
     </div>
-    <div id="preload-page"></div>
+    <div id="preload-page"></div> -->
     <header>
         <nav>
             <div>
@@ -29,6 +33,10 @@
             </div>
             <div class="nav-works">
                 <button class="navbtn"><a class="navs" href="works-cn.html">作品</a></button>
+                <div class="sub-nav"></div>
+            </div>
+            <div class="nav-works">
+                <button class="navbtn"><a class="navs" href="photo-cn.html">摄影</a></button>
                 <div class="sub-nav"></div>
             </div>
             <div>
@@ -58,9 +66,9 @@
 
     <script src="js/sketch-cn.js"></script>
     <script>langSwitchInsert();</script>
-    <script>showNav();</script>
     <script>showTitle();</script>
-    <script>showProject();</script>
+    <script>showNav();</script>
+    <script>showProject("navigation-photo");</script>
 </body>
 
 </html>

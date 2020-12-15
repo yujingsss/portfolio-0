@@ -15,17 +15,17 @@
     <script src="library/airtable.browser.js"></script>
 </head>
 
-<body onload="loaderTimer()">
-    <div id="loader">
-        <div class="lds-ripple"><div></div><div></div></div>
-    </div>
-    <div id="preload-page"></div>
+<body>
     <nav>
         <div>
             <a class="navs" href="index-cn.html">首页</a>
         </div>
         <div class="nav-works">
             <button class="navbtn"><a class="navs" href="works-cn.html">作品</a></button>
+            <div class="sub-nav"></div>
+        </div>
+        <div class="nav-works">
+            <button class="navbtn"><a class="navs" href="photo-cn.html">摄影</a></button>
             <div class="sub-nav"></div>
         </div>
         <div>
@@ -40,7 +40,7 @@
     
     <script src="js/sketch-cn.js"></script>
     <script>showNav();</script>
-    <script>listProjects();</script>
+    <script>listProjects("navigation");</script>
 </body>
 
 </html>

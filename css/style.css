@@ -75,7 +75,7 @@ nav {
     margin-bottom: 0.75rem;
     position: relative;
 }
-nav div:nth-of-type(4){
+nav div:nth-last-of-type(1){
     position: absolute;
     right: 0;
 }
@@ -141,11 +141,13 @@ button {
     /* display: inline; */
     display: block;
     position: absolute;
+    left: 0;
     padding: 0.5em 0.25em;
     background: rgba(255,255,255,0.9);
+    width: auto;
+    min-width: 120px;
 }
 .nav-works:hover .sub-nav a {
-    min-width: 135px;
     position: relative;
     display: block;
     padding-top: 0;
@@ -158,11 +160,10 @@ button {
 }
 
 .info-wrapper {
-    height: 60vh;
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 5rem;
+    margin: 8rem;
 }
 .info-wrapper div:nth-of-type(1){
     align-self: center;
@@ -186,7 +187,21 @@ button {
 }
 img {
     padding: 0.5rem;
+    -webkit-animation: appear 1s;
+    animation: appear 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
+ @-webkit-keyframes appear {
+    0% {opacity: 0; }
+    100% {opacity: 1; }  
+ }
+
+ @keyframes appear {
+    0% {opacity: 0; }
+    100% {opacity: 1; }  
+ }
+
 .img-info {
     padding: 0 0.5rem 0.5rem 0.5rem;
     font-size: 14px;
@@ -209,9 +224,10 @@ img {
 .video-wrapper {
     /* max-width: calc(177.778vh); */
     max-width: 100%;
-    height: calc(53.55vw);
+    /* height: calc(53.55vw); */
     margin: 0.5rem;
     position: relative;
+    top: 0;
 } 
 .video-content {
     position: absolute;
@@ -237,14 +253,14 @@ img {
     font-weight: bold;
 }
 .project-img {
-    margin-top: 20rem;
+    margin-top: 15rem;
     display: flex;
     flex-wrap: wrap;
 }
 .project-img > div {
     width:100%;
     height: auto;
-    margin-top: 5em;
+    margin: 5em 0;
 }
 .text-img-wrapper {
     display: flex;
@@ -413,9 +429,17 @@ footer p, footer a{
     .img-slide {
         height: 75vh;
     }
-
+    nav {
+        margin-bottom: 0.35rem;
+    }
+    nav a {
+        padding: 0.25rem;
+    }
     .sub-nav a {
         font-size: 14px;
+    }
+    .nav-works:hover .sub-nav {
+        min-width: 100px;
     }
     img {
         padding: 0.25rem;
