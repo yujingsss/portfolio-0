@@ -16,22 +16,6 @@ body {
     overflow-x: hidden;
 }
 
-img {
-    -webkit-animation: appear 1s;
-    animation: appear 1s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-}
-@-webkit-keyframes appear {
-    0% {opacity: 0; }
-    100% {opacity: 1; }  
-}
-
-@keyframes appear {
-0% {opacity: 0; }
-100% {opacity: 1; }  
-}
-
 /* scrolling */
 .show-on-scroll {
     opacity: 0;
@@ -131,10 +115,6 @@ button {
     hyphens: auto;
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
-    -webkit-animation: appear 1s;
-    animation: appear 1s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
 }
 
 .main-video {
@@ -174,6 +154,20 @@ button {
     padding: 8px;
     max-width: 400px;
     margin: 2em;
+}
+.about-img img, .about-content p, .main-video img, .scroll-wrapper a{
+    -webkit-animation: appear 0.5s;
+    animation: appear 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+@-webkit-keyframes appear {
+    0% {opacity: 0; }
+    100% {opacity: 1; }  
+}
+@keyframes appear {
+    0% {opacity: 0; }
+    100% {opacity: 1; }  
 }
 .about-content {
     max-width: 400px;
