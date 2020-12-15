@@ -544,7 +544,7 @@ function showMainVideo(){
             bgWrapper.appendChild(videoGif);
             videoGif.addEventListener("click", (event)=>{
                 videoGifzIndex ++;
-                console.log(videoGifzIndex);
+                // console.log(videoGifzIndex);
                 if (videoGifzIndex >= record.fields.image.length){
                     window.location.assign("works-cn.html");
                 } else {
