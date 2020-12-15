@@ -187,8 +187,8 @@ button {
 }
 img {
     padding: 0.5rem;
-    -webkit-animation: appear 1s;
-    animation: appear 1s;
+    -webkit-animation: appear 1.25s;
+    animation: appear 1.25s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }

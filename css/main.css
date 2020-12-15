@@ -16,6 +16,22 @@ body {
     overflow-x: hidden;
 }
 
+img {
+    -webkit-animation: appear 1s;
+    animation: appear 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+@-webkit-keyframes appear {
+    0% {opacity: 0; }
+    100% {opacity: 1; }  
+}
+
+@keyframes appear {
+0% {opacity: 0; }
+100% {opacity: 1; }  
+}
+
 /* scrolling */
 .show-on-scroll {
     opacity: 0;
@@ -115,6 +131,10 @@ button {
     hyphens: auto;
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
+    -webkit-animation: appear 1s;
+    animation: appear 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 .main-video {
