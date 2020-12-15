@@ -187,8 +187,20 @@ button {
 }
 img {
     padding: 0.5rem;
+}
+
+img, .info-wrapper div, .info-tag li{
     -webkit-animation: appear 1.25s;
     animation: appear 1.25s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+footer p, footer a{
+    opacity: 0;
+    -webkit-animation: appear 2s;
+    animation: appear 2s;
+    animation-delay: 2s;
+    -webkit-animation-delay: 2s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
@@ -196,7 +208,6 @@ img {
     0% {opacity: 0; }
     100% {opacity: 1; }  
  }
-
  @keyframes appear {
     0% {opacity: 0; }
     100% {opacity: 1; }  
