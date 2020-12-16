@@ -225,7 +225,7 @@ footer p, footer a{
 }
 .video-cover {
     position: relative;
-    margin: 0.5rem;
+    padding: 0.5rem;
 }
 .cover {
     width: 100%;
