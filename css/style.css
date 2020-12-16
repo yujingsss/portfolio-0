@@ -248,7 +248,7 @@ footer p, footer a{
 } 
 .video-content {
     position: absolute;
-    top: 0;
+    top: -0.5rem;
     left: 0;
     z-index: 0;
     width: 100%;
@@ -474,6 +474,9 @@ footer p, footer a{
     }
     .video-cover {
         padding: 0.25rem;
+    }
+    .video-content {
+        top: -0.25rem;
     }
     .info-tag li, nav a {
         font-size: 14px;
