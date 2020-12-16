@@ -233,6 +233,7 @@ footer p, footer a{
     top: 0;
     left: 0;
     z-index: -1;
+    margin: 0;
 }
 .video-wrapper {
     /* max-width: calc(177.778vh); */
@@ -240,9 +241,10 @@ footer p, footer a{
     height: calc(53.25vw);
     /* margin: 0.5rem; */
     /* padding: 0.5rem; */
+    margin-bottom: 0.5rem;
     position: relative;
-    /* top: 0;
-    left: 0; */
+    /* top: 0; */
+    left: 0;
 } 
 .video-content {
     position: absolute;
@@ -252,6 +254,7 @@ footer p, footer a{
     width: 100%;
     height: 100%;
     object-fit: contain;
+    margin-bottom: 0.5rem;
 }
 .info-tag {
     margin: 0;
