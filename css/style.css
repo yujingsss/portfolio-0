@@ -258,7 +258,6 @@ footer p, footer a{
     /* object-fit: cover; */
     object-fit: contain;
     /* margin: 0 0 0.5rem 0; */
-    margin-bottom: 0.5rem;
 }
 .info-tag {
     margin: 0;
@@ -478,6 +477,9 @@ footer p, footer a{
     }
     .video-wrapper {
         margin: 0.25rem;
+    }
+    .video-content {
+        top: -0.25rem;
     }
     .info-tag li, nav a {
         font-size: 14px;
