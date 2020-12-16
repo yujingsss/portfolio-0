@@ -9,9 +9,9 @@ function loaderTimer() {
 function loaderTimerLong() {
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     window.addEventListener('scroll', noScroll);
-    document.getElementById("loader").style.animationDuration = "4s";
-    document.getElementById("preload-page").style.animationDuration = "4s";
-    timervar = setTimeout(showPage, 4000);
+    document.getElementById("loader").style.animationDuration = "2s";
+    document.getElementById("preload-page").style.animationDuration = "2s";
+    timervar = setTimeout(showPage, 2000);
 }
 function showPage() {
     document.getElementById("preload-page").style.display = "none";

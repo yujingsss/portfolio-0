@@ -2,16 +2,16 @@
 function loaderTimer(){
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     window.addEventListener('scroll', noScroll);
-        document.getElementById("loader").style.animationDuration = "2s";
-        document.getElementById("preload-page").style.animationDuration = "2s";
+    document.getElementById("loader").style.animationDuration = "2s";
+    document.getElementById("preload-page").style.animationDuration = "2s";
     timervar = setTimeout(showPage, 2000);
 }
 function loaderTimerLong(){
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     window.addEventListener('scroll', noScroll);
-    document.getElementById("loader").style.animationDuration = "4.5s";
-    document.getElementById("preload-page").style.animationDuration = "4.5s";
-    timervar = setTimeout(showPage, 4500);
+    document.getElementById("loader").style.animationDuration = "2s";
+    document.getElementById("preload-page").style.animationDuration = "2s";
+    timervar = setTimeout(showPage, 2000);
 }
 function showPage(){
     document.getElementById("preload-page").style.display = "none";

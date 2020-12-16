@@ -230,6 +230,7 @@ footer p, footer a{
     width: 100%;
     position: absolute;
     top: 0;
+    left: 0;
     z-index: -1;
 }
 .video-wrapper {
@@ -413,6 +414,9 @@ footer p, footer a{
         width: 100%;
         margin-top: 0.5rem;
     }
+    .project-img > div {
+        margin: 4em 0;
+    }
     .description-text, .detail-wrapper {
         width: 100%;
     }
@@ -459,6 +463,9 @@ footer p, footer a{
     }
     .img-info {
         padding: 0 0.25rem 0.25rem 0.25rem;
+    }
+    .project-img > div {
+        margin: 2em 0;
     }
     .video-wrapper {
         margin: 0.25em;
