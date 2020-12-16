@@ -165,10 +165,11 @@ function showProject(tableTitle){
             let img1 = document.createElement("img");
             img1.src = record.fields.cover_image[1].url;
             img1.alt = `${record.fields.cover_image[1].filename},${record.fields.cover_image[1].id}`;
-            coverImg1.appendChild(img1);
+            // coverImg1.appendChild(img1);
             if (record.fields.video != null){
                 img1.classList.add("zoom-in-cover", "cover");
                 let videoWrapper = document.createElement("div");
+                videoWrapper.appendChild(img1);
                 // videoWrapper.style.height = "calc(53.25vw)";
                 videoWrapper.classList.add("video-wrapper");
                 videoWrapper.innerHTML = record.fields.video_cn;
@@ -176,6 +177,7 @@ function showProject(tableTitle){
                 // checkVideoSize(coverImg1, videoWrapper);
             } else {
                 // console.log("no video");
+                coverImg1.appendChild(img1);
                 img1.classList.add("zoom-in-cover");
             }
 
