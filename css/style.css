@@ -476,8 +476,8 @@ footer p, footer a{
     .project-img > div {
         margin: 2em 0;
     }
-    .video-cover {
-        padding: 0.25rem;
+    .video-wrapper {
+        margin: 0.25rem;
     }
     .info-tag li, nav a {
         font-size: 14px;
