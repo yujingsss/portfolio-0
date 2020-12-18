@@ -225,7 +225,7 @@ footer p, footer a{
 } */
 .video-cover {
     position: relative;
-    /* padding: 0.5rem; */
+    padding: 0.5rem;
 }
 .cover {
     width: 100%;
@@ -241,7 +241,7 @@ footer p, footer a{
     /* max-width: calc(177.778vh); */
     max-width: 100%;
     height: calc(53.75vw);
-    margin: 0.5rem 0.5rem 1rem 0.5rem;
+    /* margin: 0.5rem 0.5rem 1rem 0.5rem; */
     /* padding: 0.5rem; */
     /* margin-bottom: 0.5rem; */
     position: relative;
@@ -477,8 +477,11 @@ footer p, footer a{
     .project-img > div {
         margin: 2em 0;
     }
+    .video-cover {
+        padding: 0.25rem;
+    }
     .video-wrapper {
-        margin: 0.25rem 0.25rem 0.75rem 0.25rem;
+        /* margin: 0.25rem 0.25rem 0.75rem 0.25rem; */
     }
     .info-tag li, nav a {
         font-size: 14px;
