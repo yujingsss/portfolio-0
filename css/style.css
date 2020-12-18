@@ -482,20 +482,14 @@ footer p, footer a{
         margin: 2em 0;
     }
     .video-cover {
-        padding: 0.25rem;
-    }
-    .video-wrapper {
-        /* margin: 0.25rem 0.25rem 0.75rem 0.25rem; */
-        position: relative;
-        top: 0;
-        left: 0;
-        right: 0;
+        /* padding: 0.25rem; */
     }
     .video-content {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
+        padding: 0.25rem;
     }
     .info-tag li, nav a {
         font-size: 14px;
