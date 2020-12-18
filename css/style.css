@@ -257,7 +257,7 @@ footer p, footer a{
     height: 100%;
     object-fit: cover;
     /* object-fit: contain; */
-    margin: 0 0 0.5rem 0;
+    /* margin: 0 0 0.5rem 0; */
 }
 .info-tag {
     margin: 0;
