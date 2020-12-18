@@ -224,7 +224,7 @@ footer p, footer a{
     object-fit: cover;
 } */
 .video-cover {
-    position: relative;
+    /* position: relative; */
     /* padding: 0.5rem; */
 }
 .cover {
@@ -233,18 +233,14 @@ footer p, footer a{
     top: 0;
     left: 0;
     z-index: -1;
-    margin: 0;
-    object-fit: cover;
+    /* margin: 0; */
+    /* object-fit: cover; */
     padding: 0;
 }
 .video-wrapper {
     /* max-width: calc(177.778vh); */
     max-width: 100%;
-    width: 100%;
     height: calc(53.5vw);
-    /* margin: 0.5rem 0.5rem 1rem 0.5rem; */
-    /* padding: 0.5rem; */
-    /* margin-bottom: 0.5rem; */
     position: relative;
     top: 0;
     left: 0;

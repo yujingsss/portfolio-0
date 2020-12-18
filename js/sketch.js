@@ -166,13 +166,16 @@ function showProject(tableTitle) {
             img1.alt = `${record.fields.cover_image[1].filename},${record.fields.cover_image[1].id}`;
             // coverImg1.appendChild(img1);
             if (record.fields.video != null) {
-                img1.classList.add("zoom-in-cover", "cover");
-                let videoWrapper = document.createElement("div");
-                videoWrapper.classList.add("video-wrapper");
-                videoWrapper.innerHTML = record.fields.video;
-                coverImg1.appendChild(videoWrapper);
+                // img1.classList.add("zoom-in-cover", "cover");
+                // let videoWrapper = document.createElement("div");
+                // videoWrapper.classList.add("video-wrapper");
+                // videoWrapper.innerHTML = record.fields.video;
+                // coverImg1.appendChild(videoWrapper);
                 // videoWrapper.appendChild(img1);
                 // checkVideoSize(coverImg1, videoWrapper);
+
+                coverImg1.classList.add("video-wrapper");
+                coverImg1.innerHTML = record.fields.video;
             } else {
                 // console.log("no video");
                 coverImg1.appendChild(img1);
