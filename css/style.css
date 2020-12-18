@@ -477,9 +477,9 @@ footer p, footer a{
     .project-img > div {
         margin: 2em 0;
     }
-    .video-content {
-        /* padding: 0.25rem; */
-    }
+    /* .video-content {
+        padding: 0.25rem;
+    } */
     .video-wrapper {
         margin: 0.25rem;
     }
