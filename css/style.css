@@ -247,14 +247,13 @@ footer p, footer a{
     /* margin-bottom: 0.5rem; */
     position: relative;
     top: 0;
-    left: 0;
+    /* left: 0; */
     right: 0;
 } 
 .video-content {
-    -webkit-mask-position-x: left;
     position: absolute;
     top: 0;
-    left: 0;
+    /* left: 0; */
     right: 0;
     z-index: 0;
     width: 100%;
