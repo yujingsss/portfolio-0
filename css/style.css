@@ -240,6 +240,7 @@ footer p, footer a{
 .video-wrapper {
     /* max-width: calc(177.778vh); */
     max-width: 100%;
+    width: 100%;
     height: calc(53.75vw);
     /* margin: 0.5rem 0.5rem 1rem 0.5rem; */
     /* padding: 0.5rem; */
