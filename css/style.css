@@ -241,6 +241,9 @@ footer p, footer a{
     /* max-width: calc(177.778vh); */
     max-width: 100%;
     height: calc(53.5vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 } 
 .video-content {
     /* position: absolute;
