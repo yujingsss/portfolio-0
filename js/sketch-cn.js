@@ -163,8 +163,8 @@ function showProject(tableTitle){
             let coverImg1 = document.getElementsByClassName("cover-img")[1];
             coverImg1.innerHTML = "";
             let img1 = document.createElement("img");
-            img1.src = record.fields.cover_image[1].url;
-            img1.alt = `${record.fields.cover_image[1].filename},${record.fields.cover_image[1].id}`;
+            // img1.src = record.fields.cover_image[1].url;
+            // img1.alt = `${record.fields.cover_image[1].filename},${record.fields.cover_image[1].id}`;
             // coverImg1.appendChild(img1);
             if (record.fields.video != null){
                 // img1.classList.add("zoom-in-cover", "cover");
@@ -175,10 +175,19 @@ function showProject(tableTitle){
                 // coverImg1.appendChild(videoWrapper);
                 // checkVideoSize(coverImg1, videoWrapper);
 
-                coverImg1.classList.add("video-wrapper");
-                coverImg1.innerHTML = record.fields.video_cn;
+                // coverImg1.classList.add("video-wrapper");
+                // coverImg1.innerHTML = record.fields.video_cn;
+
+                let videoWrapper = document.createElement("div");
+                videoWrapper.classList.add("video-wrapper");
+                videoWrapper.innerHTML = record.fields.video_cn;
+                coverImg1.appendChild(videoWrapper);
+                videoWrapper.style.backgroundImage = `url(${record.fields.cover_image[1].url})`;
+                videoWrapper.style.backgroundSize = "cover";
             } else {
                 // console.log("no video");
+                img1.src = record.fields.cover_image[1].url;
+                img1.alt = `${record.fields.cover_image[1].filename},${record.fields.cover_image[1].id}`;
                 coverImg1.appendChild(img1);
                 img1.classList.add("zoom-in-cover");
             }
