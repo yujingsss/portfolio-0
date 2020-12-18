@@ -168,11 +168,10 @@ function showProject(tableTitle) {
             if (record.fields.video != null) {
                 img1.classList.add("zoom-in-cover", "cover");
                 let videoWrapper = document.createElement("div");
-                // videoWrapper.style.height = "calc(53.25vw)";
                 videoWrapper.classList.add("video-wrapper");
                 videoWrapper.innerHTML = record.fields.video;
                 coverImg1.appendChild(videoWrapper);
-                videoWrapper.appendChild(img1);
+                // videoWrapper.appendChild(img1);
                 // checkVideoSize(coverImg1, videoWrapper);
             } else {
                 // console.log("no video");

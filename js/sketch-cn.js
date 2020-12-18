@@ -170,10 +170,9 @@ function showProject(tableTitle){
                 img1.classList.add("zoom-in-cover", "cover");
                 let videoWrapper = document.createElement("div");
                 videoWrapper.appendChild(img1);
-                // videoWrapper.style.height = "calc(53.25vw)";
                 videoWrapper.classList.add("video-wrapper");
                 videoWrapper.innerHTML = record.fields.video_cn;
-                coverImg1.appendChild(videoWrapper);
+                // coverImg1.appendChild(videoWrapper);
                 // checkVideoSize(coverImg1, videoWrapper);
             } else {
                 // console.log("no video");
