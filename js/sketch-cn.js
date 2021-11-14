@@ -29,6 +29,7 @@ var Airtable = require('airtable');
 var base = new Airtable({ apiKey: 'key9lokycPO090Rlh' }).base('app9l86cCsmAxsTwf');
 let recordMain = "recY4frnfxVacQC9M";
 let recordAbout = "rec9gDiJVlpVl5b7Z";
+let recordPortfolio = "recxp2hCMenh3CWXl";
 
 function listProjects(tableTitle){
     base(tableTitle).select({
@@ -597,6 +598,20 @@ function showAboutPage(){
         img.src = record.fields.image[0].url;
         img.alt = `${record.fields.image[0].filename}, ${record.fields.image[0].id}`;
         aboutImg.appendChild(img);
+    });
+}
+function showPortfolio() {
+    base('others').find(recordPortfolio, function (err, record) {
+        if (err) { console.error(err); return; }
+        //show portfolio
+        let portfolioA = document.createElement("a");
+        portfolioA.href = record.fields.portfolio_file[0].url;
+        let aText = record.fields.text_cn;
+        portfolioA.text= aText;
+        let portfolioText = document.getElementsByClassName("portfolio-div")[0];
+        let p = document.createElement("p");
+        p.appendChild(portfolioA);
+        portfolioText.appendChild(p);
     });
 }
 

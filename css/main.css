@@ -191,6 +191,25 @@ button {
 footer {
     height: 150px;
 }
+.center-text {
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.center-text > p {
+    font-size: 1rem;
+    font-weight: 100;
+}
+.center-text > p > a {
+    text-decoration: underline;
+}
 
 @media screen and (max-width: 800px){
     body {
