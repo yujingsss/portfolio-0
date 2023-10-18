@@ -26,7 +26,12 @@ function noScroll() {
 
 //data airtable
 var Airtable = require('airtable');
-var base = new Airtable({ apiKey: 'key9lokycPO090Rlh' }).base('app9l86cCsmAxsTwf');
+Airtable.configure({
+    endpointUrl: 'https://api.airtable.com',
+    apiKey: 'patcxPzWy78KOMLdZ.65b6b63e7f2a213954ae23d243ebca2c0cd7fc399e961d4109dab1fdab592816'
+});
+var base = Airtable.base('app9l86cCsmAxsTwf');
+// var base = new Airtable({ apiKey: 'key9lokycPO090Rlh' }).base('app9l86cCsmAxsTwf');
 let recordMain = "recY4frnfxVacQC9M";
 let recordAbout = "rec9gDiJVlpVl5b7Z";
 let recordPortfolio = "recxp2hCMenh3CWXl";
