@@ -333,87 +333,90 @@ function showProject(tableTitle) {
                 let galleryWrapper = document.createElement("div");
                 galleryWrapper.classList.add("gallery-wrapper");
                 mainDiv.appendChild(galleryWrapper);
-                let imgContainer = document.createElement("div");
-                imgContainer.classList.add("img-container");
-                let imgSlide = document.createElement("div");
-                imgSlide.classList.add('img-slide');
-                imgContainer.appendChild(imgSlide);
 
-                let imglast = document.createElement("img");
-                imglast.src = records[records.length - 1].fields.image[0].url;
-                imglast.alt = `${records[records.length - 1].fields.img_title}, ${records[records.length - 1].id}`;
-                imgSlide.appendChild(imglast);
+                // let imgSlide = document.createElement("div");
+                // imgSlide.classList.add('img-slide');
+                // imgContainer.appendChild(imgSlide);
+
+                // let imglast = document.createElement("img");
+                // imglast.src = records[records.length - 1].fields.image[0].url;
+                // imglast.alt = `${records[records.length - 1].fields.img_title}, ${records[records.length - 1].id}`;
+                // imgSlide.appendChild(imglast);
                 records.forEach(record => {
+                    let imgContainer = document.createElement("div");
+                    imgContainer.classList.add("img-container");
                     let img = document.createElement("img");
                     img.src = record.fields.image[0].url;
                     img.alt = `${record.fields.img_title}, ${record.id}`;
                     img.title = record.fields.img_title;
-                    imgSlide.appendChild(img); 
+                    imgContainer.appendChild(img); 
+                    galleryWrapper.appendChild(imgContainer);
                 });
-                let imgfirst = document.createElement("img");
-                imgfirst.src = records[0].fields.image[0].url;
-                imgfirst.alt = `${records[0].fields.img_title}, ${records[0].id}`;
-                imgSlide.appendChild(imgfirst);
-                galleryWrapper.appendChild(imgContainer);
-                let control = document.createElement("div")
-                let prev = document.createElement("p");
-                let next = document.createElement("p");
-                prev.innerText = "prev";
-                next.innerText = "next";
-                control.appendChild(prev);
-                control.appendChild(next);
-                control.classList.add("img-control");
-                galleryWrapper.appendChild(control);
+                // let imgfirst = document.createElement("img");
+                // imgfirst.src = records[0].fields.image[0].url;
+                // imgfirst.alt = `${records[0].fields.img_title}, ${records[0].id}`;
+                // imgSlide.appendChild(imgfirst);
+
+                // let control = document.createElement("div")
+                // let prev = document.createElement("p");
+                // let next = document.createElement("p");
+                // prev.innerText = "prev";
+                // next.innerText = "next";
+                // control.appendChild(prev);
+                // control.appendChild(next);
+                // control.classList.add("img-control");
+                // galleryWrapper.appendChild(control);
+
                 //slide control
-                let counter = 1;
-                let gallerySize = imgSlide.clientWidth;
-                window.addEventListener('resize', () => {
-                    gallerySize = imgSlide.clientWidth;
-                });
-                imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
-                setInterval(sliding, 4000);
-                function sliding() {
-                    if (counter >= records.length + 1) return;
-                    counter++;
-                    imgSlide.style.transition = "transform 0.6s ease-in-out";
-                    imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
-                    imgSlide.addEventListener("transitionend", () => {
-                        if (counter == 0) {
-                            imgSlide.style.transition = "none";
-                            counter = records.length;
-                            imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
-                        }
-                        if (counter == records.length + 1) {
-                            imgSlide.style.transition = "none";
-                            counter = records.length + 2 - counter;
-                            imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
-                        }
-                    });
-                }
-                prev.addEventListener("click", () => {
-                    if (counter <= 0) return;
-                    counter--;
-                    imgSlide.style.transition = "transform 0.4s ease-in-out";
-                    imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
-                });
-                next.addEventListener("click", () => {
-                    if (counter >= records.length + 1) return;
-                    counter++;
-                    imgSlide.style.transition = "transform 0.4s ease-in-out";
-                    imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
-                });
-                imgSlide.addEventListener("transitionend", () => {
-                    if (counter == 0) {
-                        imgSlide.style.transition = "none";
-                        counter = records.length;
-                        imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
-                    }
-                    if (counter == records.length + 1) {
-                        imgSlide.style.transition = "none";
-                        counter = records.length + 2 - counter;
-                        imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
-                    }
-                });
+                // let counter = 1;
+                // let gallerySize = imgSlide.clientWidth;
+                // window.addEventListener('resize', () => {
+                //     gallerySize = imgSlide.clientWidth;
+                // });
+                // imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                // setInterval(sliding, 4000);
+                // function sliding() {
+                //     if (counter >= records.length + 1) return;
+                //     counter++;
+                //     imgSlide.style.transition = "transform 0.6s ease-in-out";
+                //     imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                //     imgSlide.addEventListener("transitionend", () => {
+                //         if (counter == 0) {
+                //             imgSlide.style.transition = "none";
+                //             counter = records.length;
+                //             imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                //         }
+                //         if (counter == records.length + 1) {
+                //             imgSlide.style.transition = "none";
+                //             counter = records.length + 2 - counter;
+                //             imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                //         }
+                //     });
+                // }
+                // prev.addEventListener("click", () => {
+                //     if (counter <= 0) return;
+                //     counter--;
+                //     imgSlide.style.transition = "transform 0.4s ease-in-out";
+                //     imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                // });
+                // next.addEventListener("click", () => {
+                //     if (counter >= records.length + 1) return;
+                //     counter++;
+                //     imgSlide.style.transition = "transform 0.4s ease-in-out";
+                //     imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                // });
+                // imgSlide.addEventListener("transitionend", () => {
+                //     if (counter == 0) {
+                //         imgSlide.style.transition = "none";
+                //         counter = records.length;
+                //         imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                //     }
+                //     if (counter == records.length + 1) {
+                //         imgSlide.style.transition = "none";
+                //         counter = records.length + 2 - counter;
+                //         imgSlide.style.transform = `translateX(${-gallerySize * counter}px)`;
+                //     }
+                // });
             }
         }
     });
