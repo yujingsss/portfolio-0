@@ -343,7 +343,7 @@ function showProject(tableTitle) {
                     img.src = record.fields.image[0].url;
                     img.alt = `${record.fields.img_title}, ${record.id}`;
                     img.title = record.fields.img_title;
-                    imgSlide.appendChild(img);
+                    imgSlide.appendChild(img); 
                 });
                 let imgfirst = document.createElement("img");
                 imgfirst.src = records[0].fields.image[0].url;
@@ -601,6 +601,7 @@ function showPortfolio() {
         if (err) { console.error(err); return; }
         //show portfolio
         let portfolioA = document.createElement("a");
+        // console.log(record.fields.portfolio_file[0].url);
         portfolioA.href = record.fields.portfolio_file[0].url;
         let aText = record.fields.text;
         portfolioA.text= aText;
